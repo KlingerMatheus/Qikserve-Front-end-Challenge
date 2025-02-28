@@ -1,0 +1,24 @@
+button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: var(--brown);
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: var(--rounded-full);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background: var(--lighter-brown);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    filter: brightness(125%);
+  }
+}
