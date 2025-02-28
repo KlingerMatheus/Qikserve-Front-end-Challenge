@@ -1,5 +1,7 @@
+import PageInProgress from "@/components/page-in-maintenance";
+
 const ContactPage = () => {
-  return <h1>Contact Page</h1>;
+  return <PageInProgress />;
 };
 
 export default ContactPage;

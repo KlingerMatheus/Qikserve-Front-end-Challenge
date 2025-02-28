@@ -1,5 +1,7 @@
+import PageInProgress from "@/components/page-in-maintenance";
+
 const LoginPage = () => {
-  return <h1>Login Page</h1>;
+  return <PageInProgress />;
 };
 
 export default LoginPage;
