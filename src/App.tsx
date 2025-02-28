@@ -4,6 +4,7 @@ import { useNavigate } from "@/hooks";
 import ContactPage from "./pages/contact";
 import LoginPage from "./pages/login";
 import MenuPage from "./pages/menu";
+import Header from "./components/header";
 
 const App = () => {
   const { route } = useNavigate();
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <main>
       <Navbar />
+      <Header />
       {renderPage()}
     </main>
   );

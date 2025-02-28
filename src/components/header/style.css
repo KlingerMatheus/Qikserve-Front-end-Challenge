@@ -1,0 +1,54 @@
+.header-container {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background-brown);
+}
+
+.overlay-background {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(
+    90deg,
+    var(--background-brown) 0%,
+    rgba(54, 35, 28, 0) 50%,
+    var(--background-brown) 100%
+  );
+  z-index: 2;
+}
+
+.header {
+  position: absolute;
+  top: 49px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 530px;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 10%,
+    rgba(0, 0, 0, 0.8) 30%,
+    black 50%,
+    rgba(0, 0, 0, 0.8) 70%,
+    rgba(0, 0, 0, 0.3) 90%,
+    transparent 100%
+  );
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 125.33px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .overlay-background {
+    background: transparent;
+  }
+}
