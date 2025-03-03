@@ -8,6 +8,7 @@ import { MenuItem } from "./MenuItem.component";
 import { Accordion } from "@/components/accordion";
 import "./style.css";
 import { MenuSectionItem } from "./MenuSectionItem.component";
+import { Section } from "@/types";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
@@ -27,6 +28,16 @@ const MenuPage = () => {
   if (isMenuLoading) {
     return <Spinner />;
   }
+
+  const renderAccordion = (section: Section) => (
+    <Accordion key={section.id} title={section.name} defaultOpen>
+      <div className="menu-list-items">
+        {section.items.map((item) => (
+          <MenuItem key={item.id} item={item} />
+        ))}
+      </div>
+    </Accordion>
+  );
 
   return (
     <>
@@ -51,28 +62,12 @@ const MenuPage = () => {
             const isSectionActive = section.id === activeSectionId;
 
             if (!search && isSectionActive) {
-              return (
-                <Accordion key={section.id} title={section.name} defaultOpen>
-                  <div className="menu-list-items">
-                    {section.items.map((item) => (
-                      <MenuItem key={item.id} item={item} />
-                    ))}
-                  </div>
-                </Accordion>
-              );
+              return renderAccordion(section);
+            } else if (search) {
+              return renderAccordion(section);
             }
 
-            if (search) {
-              return (
-                <Accordion key={section.id} title={section.name} defaultOpen>
-                  <div className="menu-list-items">
-                    {section.items.map((item) => (
-                      <MenuItem key={item.id} item={item} />
-                    ))}
-                  </div>
-                </Accordion>
-              );
-            }
+            return null;
           })}
         </div>
         <div className="view-allergy-link">
