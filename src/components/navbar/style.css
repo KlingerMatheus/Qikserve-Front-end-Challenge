@@ -7,6 +7,11 @@
   padding: 0px;
   height: 52px;
 
+  .navbar-icon {
+    height: 28px;
+    width: 28px;
+  }
+
   ul {
     display: flex;
     justify-content: center;
