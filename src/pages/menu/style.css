@@ -1,0 +1,149 @@
+.menu-list-header {
+  position: relative;
+  display: flex;
+  gap: 12px;
+
+  padding-top: 20px;
+  padding-bottom: 24px;
+  padding-left: 16px;
+
+  img {
+    padding: 4px;
+    width: 82px;
+    height: 82px;
+    border-radius: 9999px;
+    object-fit: cover;
+  }
+
+  [data-isactive="true"] {
+    /* border-bottom: 2px solid var(--brown); */
+    pointer-events: none;
+
+    &::after {
+      content: "";
+      margin-inline: 4px;
+      width: calc(100% - 8px);
+      height: 2px;
+      background: var(--brown);
+    }
+
+    img {
+      outline: 2px solid var(--brown);
+    }
+
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+.menu-list-header-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 104px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--brown-hover);
+    transition: all 150ms ease;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    height: 62px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18.75px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.menu-list-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.menu-list-item {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+
+  img {
+    width: 128px;
+    height: 85px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+}
+
+.default {
+  height: 73px;
+}
+
+.with-description {
+  height: 117px;
+}
+
+.menu-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.item-name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18.75px;
+  letter-spacing: 0px;
+  color: #121212;
+}
+
+.item-description {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18.75px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 90%;
+  color: var(--regular-gray);
+}
+
+.item-price {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18.75px;
+  letter-spacing: 0.5px;
+  color: var(--regular-gray);
+}
+
+.view-allergy-link {
+  border: 1px solid #eee;
+  padding: 24px;
+  text-align: center;
+  background: var(--background-gray);
+  display: flex;
+
+  span {
+    background: #fff;
+    flex-grow: 1;
+    border-radius: var(--rounded-full);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18.75px;
+    letter-spacing: 0px;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-offset: Auto;
+    text-decoration-thickness: Auto;
+    cursor: pointer;
+    color: var(--brown);
+  }
+}
