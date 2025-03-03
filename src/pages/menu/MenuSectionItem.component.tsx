@@ -19,7 +19,7 @@ export const MenuSectionItem: FunctionComponent<Props> = ({
       onClick={onClick}
       data-isactive={section.id === activeSectionId ? true : null}
     >
-      <img src={section.images?.[0].image} aria-label={section.name} />
+      <img src={section.images?.[0].image} alt={section.name} />
       <span>{section.name}</span>
     </div>
   );

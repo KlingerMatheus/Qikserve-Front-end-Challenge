@@ -16,7 +16,9 @@ const PageInMaintenance: FunctionComponent<Props> = ({ pageExists = true }) => {
 
   return (
     <div className="container">
-      {pageExists && <img src={PageInMaintenanceImage} />}
+      {pageExists && (
+        <img src={PageInMaintenanceImage} alt="Page in maintenance" />
+      )}
       <p>
         {pageExists
           ? "This page is currently in maintenance."
