@@ -28,7 +28,9 @@ export const MenuItem: FunctionComponent<Props> = ({ item }) => {
             })}
           </span>
         </div>
-        {item.images && <img src={item.images?.[0].image} alt={item.name} />}
+        {item.images && (
+          <img src={item.images?.[0].image} alt={item.name} loading="lazy" />
+        )}
       </div>
     </div>
   );

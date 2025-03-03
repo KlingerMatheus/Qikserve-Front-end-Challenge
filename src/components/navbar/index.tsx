@@ -27,17 +27,20 @@ export const Navbar: FC = () => {
           </>
         )}
 
-        {!isMobileOrTablet &&
-          NAVBAR_ITEMS.map((item) => {
-            const isActive = route === item.path;
+        {!isMobileOrTablet && (
+          <ul>
+            {NAVBAR_ITEMS.map((item) => {
+              const isActive = route === item.path;
 
-            return (
-              <li key={item.name} className={isActive ? "active" : ""}>
-                <a href={item.path}>{item.name}</a>
-                {isActive && <span />}
-              </li>
-            );
-          })}
+              return (
+                <li key={item.name} className={isActive ? "active" : ""}>
+                  <a href={item.path}>{item.name}</a>
+                  {isActive && <span />}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </nav>
 
       {isMenuOpen &&

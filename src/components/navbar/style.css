@@ -3,8 +3,16 @@
   background-color: var(--brown);
   display: flex;
   justify-content: center;
-  height: 52px;
   transition: ease-in-out 100ms;
+  padding: 0px;
+  height: 52px;
+
+  ul {
+    display: flex;
+    justify-content: center;
+
+    margin: 0;
+  }
 
   & * {
     color: #fff;
