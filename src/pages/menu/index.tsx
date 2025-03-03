@@ -2,7 +2,7 @@ import { PageSection } from "@/components/page-section";
 import PageSectionFooter from "@/components/page-section/PageSectionFooter";
 import PageSectionHeader from "@/components/page-section/PageSectionHeader";
 import { Spinner } from "@/components/spinner";
-import { useMenuDetails } from "@/hooks";
+import { useBreakpoints, useMenuDetails } from "@/hooks";
 import { useEffect, useState } from "react";
 import { MenuItem } from "./MenuItem.component";
 import { Accordion } from "@/components/accordion";
@@ -13,6 +13,8 @@ const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
   const [activeSectionId, setActiveSectionId] = useState<number | null>(null);
   const [search] = useState("");
+  const device = useBreakpoints();
+  const isLaptopOrDesktop = ["laptop", "desktop"].includes(device);
 
   useEffect(() => {
     const firstSection = menuDetails?.sections.find((section) => section.id);
@@ -28,7 +30,10 @@ const MenuPage = () => {
 
   return (
     <>
-      <PageSection style={{ maxWidth: 600 }} className="page-section-menu-list">
+      <PageSection
+        style={{ maxWidth: isLaptopOrDesktop ? 600 : "100%" }}
+        className="page-section-menu-list"
+      >
         <div className="menu-list-header">
           {menuDetails
             ? menuDetails.sections.map((section) => (
@@ -74,17 +79,20 @@ const MenuPage = () => {
           <span>View allergy information</span>
         </div>
       </PageSection>
-      <PageSection
-        style={{
-          minWidth: 320,
-          maxWidth: 320,
-          height: "min-content",
-        }}
-      >
-        <PageSectionHeader title="Carrinho" />
-        <div className="empty-cart">Seu carrinho está vazio</div>
-        {/* <PageSectionFooter /> */}
-      </PageSection>
+      {isLaptopOrDesktop && (
+        <PageSection
+          className=""
+          style={{
+            minWidth: 320,
+            maxWidth: 320,
+            height: "min-content",
+          }}
+        >
+          <PageSectionHeader title="Carrinho" />
+          <div className="empty-cart">Seu carrinho está vazio</div>
+          {/* <PageSectionFooter /> */}
+        </PageSection>
+      )}
     </>
   );
 };

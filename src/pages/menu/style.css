@@ -65,6 +65,14 @@
 .menu-list-item-container {
   display: flex;
   align-items: center;
+  transition: all 250ms ease;
+
+  &:hover {
+    background: var(--brown-hover);
+    border-radius: 8px;
+    padding-inline: 8px;
+    cursor: pointer;
+  }
 }
 
 .menu-list-item {
