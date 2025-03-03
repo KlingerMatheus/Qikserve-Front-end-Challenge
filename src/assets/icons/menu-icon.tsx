@@ -9,7 +9,7 @@ const MenuIcon = (props: SVGAttributes<SVGSVGElement>) => (
     fill="currentColor"
     {...props}
   >
-    <g clip-path="url(#clip0_15459_2577)">
+    <g clipPath="url(#clip0_15459_2577)">
       <rect width="16" height="2" rx="1" fill="currentColor" />
       <rect y="7" width="16" height="2" rx="1" fill="currentColor" />
       <rect y="14" width="16" height="2" rx="1" fill="currentColor" />

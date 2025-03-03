@@ -1,6 +1,7 @@
 button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   border: none;
   background: var(--brown);
@@ -13,12 +14,19 @@ button {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:is(:disabled) {
     background: var(--lighter-brown);
     transform: scale(1.02);
   }
 
   &:active {
     filter: brightness(125%);
+  }
+
+  &:disabled {
+    background: #dadada;
+    color: #5f5f5f;
+    cursor: not-allowed;
   }
 }

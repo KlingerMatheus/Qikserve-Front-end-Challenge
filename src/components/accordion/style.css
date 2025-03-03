@@ -1,0 +1,32 @@
+details {
+  overflow: hidden;
+  padding-inline: 16px;
+}
+
+details[open] > summary span {
+  transform: rotateX(0deg);
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28.13px;
+  letter-spacing: 0.5px;
+
+  padding-top: 32px;
+  padding-bottom: 12px;
+
+  span {
+    display: flex;
+    align-items: center;
+    color: #4f372f;
+    transition: all 0.2s ease-in;
+    transform-origin: center;
+    transform: rotateX(180deg);
+  }
+}

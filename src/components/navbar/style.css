@@ -3,8 +3,16 @@
   background-color: var(--brown);
   display: flex;
   justify-content: center;
-  height: 52px;
   transition: ease-in-out 100ms;
+  padding: 0px;
+  height: 52px;
+
+  ul {
+    display: flex;
+    justify-content: center;
+
+    margin: 0;
+  }
 
   & * {
     color: #fff;
@@ -128,25 +136,5 @@
     letter-spacing: 0.75px;
     text-align: center;
     flex-grow: 1;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
   }
 }

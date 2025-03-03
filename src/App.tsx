@@ -6,6 +6,8 @@ import LoginPage from "./pages/login";
 import MenuPage from "./pages/menu";
 import Header from "./components/header";
 import PageInMaintenance from "./components/page-in-maintenance";
+import { Provider } from "react-redux";
+import store from "@/store";
 
 const App = () => {
   const { route } = useNavigate();
@@ -31,7 +33,11 @@ const App = () => {
     <main>
       <Navbar />
       <Header />
-      {renderPage()}
+      <section>
+        <Provider store={store}>
+          <div className="page-container">{renderPage()}</div>
+        </Provider>
+      </section>
     </main>
   );
 };
