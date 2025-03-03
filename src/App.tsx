@@ -31,7 +31,9 @@ const App = () => {
     <main>
       <Navbar />
       <Header />
-      {renderPage()}
+      <section>
+        <div className="page-container">{renderPage()}</div>
+      </section>
     </main>
   );
 };
