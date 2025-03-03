@@ -8,7 +8,10 @@ import { MenuItem } from "./MenuItem.component";
 import { Accordion } from "@/components/accordion";
 import "./style.css";
 import { MenuSectionItem } from "./MenuSectionItem.component";
-import { Section } from "@/types";
+import { Item, Section } from "@/types";
+import { Modal } from "@/components/modal";
+import { useDispatch } from "react-redux";
+import { cartSetSelectedItem } from "@/reducers/slices/cartSlice";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
@@ -16,6 +19,8 @@ const MenuPage = () => {
   const [search] = useState("");
   const device = useBreakpoints();
   const isLaptopOrDesktop = ["laptop", "desktop"].includes(device);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const firstSection = menuDetails?.sections.find((section) => section.id);
@@ -29,18 +34,30 @@ const MenuPage = () => {
     return <Spinner />;
   }
 
+  const setSelectedItem = (item: Item) => {
+    dispatch(cartSetSelectedItem(item));
+    setIsModalOpen(true);
+  };
+
   const renderAccordion = (section: Section) => (
     <Accordion key={section.id} title={section.name} defaultOpen>
       <div className="menu-list-items">
         {section.items.map((item) => (
-          <MenuItem key={item.id} item={item} />
+          <MenuItem
+            onClick={() => setSelectedItem(item)}
+            key={item.id}
+            item={item}
+          />
         ))}
       </div>
     </Accordion>
   );
 
+  const handleCloseModal = () => setIsModalOpen(false);
+
   return (
     <>
+      {isModalOpen && <Modal closeModal={handleCloseModal} />}
       <PageSection
         style={{ maxWidth: isLaptopOrDesktop ? 600 : "100%" }}
         className="page-section-menu-list"
