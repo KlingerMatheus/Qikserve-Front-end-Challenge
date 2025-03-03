@@ -55,3 +55,12 @@ export interface Menu {
   collapse: 0 | 1;
   sections: Section[];
 }
+
+export interface CartState {
+  items: Item[];
+  selectedItem?: Item;
+}
+
+export interface RootState {
+  cart: CartState;
+}
