@@ -1,11 +1,11 @@
-import {
-  CartItem,
-  CartState,
-  Item,
-  RemoveItemAction,
-  UpdateQuantityAction,
-} from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  CartState,
+  CartItem,
+  UpdateQuantityAction,
+  RemoveItemAction,
+  Item,
+} from "../../types";
 
 const initialState: CartState = {
   items: [],
@@ -80,7 +80,7 @@ const cartSlice = createSlice({
       state.totalPrice = calculateTotalPrice(state.items);
     },
     cartRemoveItem: (state, action: PayloadAction<RemoveItemAction>) => {
-      state.items = state.items.filter((item) => {
+      state.items = state.items.filter((item: CartItem) => {
         const { id, modifierId } = action.payload;
 
         return item.id !== id || item.selectedModifierId !== modifierId;

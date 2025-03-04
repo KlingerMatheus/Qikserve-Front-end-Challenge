@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { NAVBAR_ITEMS } from "./constants";
-import { useBreakpoints, useNavigate } from "@/hooks/index";
-import { CloseIcon, LeftArrowIcon, MenuIcon } from "@/assets/icons";
+import { useBreakpoints, useNavigate } from "../../hooks/index";
+import { CloseIcon, LeftArrowIcon, MenuIcon } from "../../assets/icons";
 
 import "./navbar.css";
 

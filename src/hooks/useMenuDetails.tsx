@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 
-import { Menu } from "@/types";
+import { Menu } from "../types";
 
 function useMenuDetails() {
   const [menuDetails, setMenuDetails] = useState<Menu | null>();
   const [isMenuLoading, setIsMenuLoading] = useState(true);
-  const apiUrl = process.env.REACT_APP_API_URL;
-  // const apiUrl = "https://cdn-dev.preoday.com/challenge";
+  const apiUrl =
+    import.meta.env.MODE === "production"
+      ? process.env.REACT_APP_API_URL
+      : "/api";
 
   console.log(apiUrl);
 
   useEffect(() => {
-    fetch(`${apiUrl}/menu`)
+    let fetchUrl = `${apiUrl}/menu`;
+
+    fetch(fetchUrl)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error on requesting from API");

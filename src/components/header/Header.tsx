@@ -1,5 +1,5 @@
-import BurgerHeader from "@/assets/burger-header.webp";
-import BurgerLogo from "@/assets/burger-logo.webp";
+import BurgerHeader from "../../assets/burger-header.webp";
+import BurgerLogo from "../../assets/burger-logo.webp";
 
 import "./header.css";
 

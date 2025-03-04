@@ -1,20 +1,20 @@
 import { FunctionComponent } from "react";
 import { createPortal } from "react-dom";
 
-import { useBreakpoints } from "@/hooks";
-import { CloseIcon, LeftArrowIcon } from "@/assets/icons";
-import { CartItem as CartItemType, RootState } from "@/types";
+import { useBreakpoints } from "../../../hooks";
+import { CloseIcon, LeftArrowIcon } from "../../../assets/icons";
+import { CartItem as CartItemType, RootState } from "../../../types";
 import { CartItem } from "../CartItem.component";
-import { formatPrice } from "@/utils";
-import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
+import { formatPrice } from "../../../utils";
+import { PrimaryButton } from "../../../components/primary-button/PrimaryButton";
 import { useDispatch, useSelector } from "react-redux";
-import { cartRemoveAllItems } from "@/reducers/slices/cartSlice";
+import { cartRemoveAllItems } from "../../../reducers/slices/cartSlice";
 
 import "./cart-mobile.css";
 
 interface Props {
   isOpen?: boolean;
-  closeCart: VoidFunction;
+  closeCart: () => void;
   cartItems: CartItemType[];
 }
 
@@ -32,7 +32,6 @@ const CartMobileContainer: FunctionComponent<Props> = ({
   function handleCheckout() {
     dispatch(cartRemoveAllItems());
     closeCart();
-    alert("Simulating checkout...");
   }
 
   return (

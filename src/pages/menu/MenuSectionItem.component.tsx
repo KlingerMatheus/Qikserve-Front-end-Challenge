@@ -1,10 +1,10 @@
-import { Section } from "@/types";
+import { Section } from "../../types";
 import { FunctionComponent } from "react";
 
 interface Props {
   section: Section;
   activeSectionId: number | null;
-  onClick: VoidFunction;
+  onClick: () => void;
 }
 
 export const MenuSectionItem: FunctionComponent<Props> = ({

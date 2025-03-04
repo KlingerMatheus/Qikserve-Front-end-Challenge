@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useBreakpoints, useMenuDetails } from "@/hooks";
+import { useBreakpoints, useMenuDetails } from "../../hooks";
 
-import { CartItem as CartItemType, Item, RootState, Section } from "@/types";
-import { cartSetSelectedItem } from "@/reducers/slices/cartSlice";
-import { formatPrice } from "@/utils";
+import {
+  CartItem as CartItemType,
+  Item,
+  RootState,
+  Section,
+} from "../../types";
+import { cartSetSelectedItem } from "../../reducers/slices/cartSlice";
+import { formatPrice } from "../../utils";
 
 import { CartMobile } from "./cart-mobile/CartMobile";
-import { Page } from "@/components/page-section";
-import { Spinner } from "@/components/spinner/Spinner";
-import { SearchBar } from "@/components/search-bar/SearchBar";
-import { Accordion } from "@/components/accordion/Accordion";
-import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
+import { Page } from "../../components/page-section";
+import { Spinner } from "../../components/spinner/Spinner";
+import { SearchBar } from "../../components/search-bar/SearchBar";
+import { Accordion } from "../../components/accordion/Accordion";
+import { PrimaryButton } from "../../components/primary-button/PrimaryButton";
 import { CartItem } from "./CartItem.component";
-import { Modal } from "@/components/selected-item-modal/SelectedItemModal";
+import { Modal } from "../../components/selected-item-modal/SelectedItemModal";
 import { MenuItem } from "./MenuItem.component";
 import { MenuSectionItem } from "./MenuSectionItem.component";
 
@@ -34,7 +39,9 @@ const MenuPage = () => {
   const { isLaptopOrDesktop } = useBreakpoints();
 
   useEffect(() => {
-    const firstSection = menuDetails?.sections.find((section) => section.id);
+    const firstSection = menuDetails?.sections.find(
+      (section: Section) => section.id
+    );
 
     if (!firstSection) return;
 
@@ -57,7 +64,7 @@ const MenuPage = () => {
   const renderAccordion = (section: Section) => (
     <Accordion key={section.id} title={section.name} defaultOpen>
       <div className="menu-list-items">
-        {section.items.map((item) => {
+        {section.items.map((item: Item) => {
           if (
             search &&
             !item.name.toLowerCase().includes(search.toLowerCase())
@@ -66,12 +73,13 @@ const MenuPage = () => {
           }
 
           const cartItem = cartItems.filter(
-            (cartItem) => cartItem.id === item.id
+            (cartItem: CartItemType) => cartItem.id === item.id
           );
           const cartItemQuantity =
             cartItem.length > 1
               ? cartItem.reduce(
-                  (acc, currentValue) => acc + currentValue.quantity,
+                  (acc: number, currentValue: CartItemType) =>
+                    acc + currentValue.quantity,
                   0
                 )
               : cartItem[0]?.quantity;
@@ -105,7 +113,7 @@ const MenuPage = () => {
         >
           <div className="menu-list-header">
             {menuDetails
-              ? menuDetails.sections.map((section) => (
+              ? menuDetails.sections.map((section: Section) => (
                   <MenuSectionItem
                     activeSectionId={activeSectionId}
                     onClick={() => setActiveSectionId(section.id)}
@@ -116,7 +124,7 @@ const MenuPage = () => {
               : "Nothing available"}
           </div>
           <div className="menu-list-sections">
-            {menuDetails?.sections.map((section) => {
+            {menuDetails?.sections.map((section: Section) => {
               const isSectionActive = section.id === activeSectionId;
 
               if (isSectionActive) {

@@ -5,7 +5,7 @@ import "./primary-button.css";
 interface Props {
   label: string;
   startIcon?: JSX.Element;
-  onClick: VoidFunction;
+  onClick: () => void;
 }
 
 type PrimaryButtonProps = Props & ButtonHTMLAttributes<HTMLButtonElement>;

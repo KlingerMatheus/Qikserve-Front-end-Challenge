@@ -1,4 +1,4 @@
-import PageInProgress from "@/components/page-in-maintenance/PageInMaintenance";
+import PageInProgress from "../components/page-in-maintenance/PageInMaintenance";
 
 const ContactPage = () => {
   return <PageInProgress />;

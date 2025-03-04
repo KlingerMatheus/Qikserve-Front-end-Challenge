@@ -10,17 +10,17 @@ import { createPortal } from "react-dom";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { CloseIcon } from "@/assets/icons";
-import { RootState } from "@/types";
-import { formatPrice } from "@/utils";
-import { useBreakpoints } from "@/hooks";
-import { cartAddNewItem } from "@/reducers/slices/cartSlice";
-import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
+import { CloseIcon } from "../../assets/icons";
+import { RootState } from "../../types";
+import { formatPrice } from "../../utils";
+import { useBreakpoints } from "../../hooks";
+import { cartAddNewItem } from "../../reducers/slices/cartSlice";
+import { PrimaryButton } from "../../components/primary-button/PrimaryButton";
 
 import "./selected-item-modal.css";
 
 interface Props {
-  closeModal: VoidFunction;
+  closeModal: () => void;
 }
 
 type SelectedOption = { modifierId?: number; unitPrice?: number };

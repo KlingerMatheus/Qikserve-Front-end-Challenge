@@ -1,9 +1,9 @@
 import {
   cartRemoveItem,
   updateCartItemQuantity,
-} from "@/reducers/slices/cartSlice";
-import { CartItem as CartItemType, RemoveItemAction } from "@/types";
-import { findMatchingModifier, formatPrice } from "@/utils";
+} from "../../reducers/slices/cartSlice";
+import { CartItem as CartItemType, RemoveItemAction } from "../../types";
+import { findMatchingModifier, formatPrice } from "../../utils";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";

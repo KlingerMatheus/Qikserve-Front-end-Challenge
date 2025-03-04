@@ -1,10 +1,10 @@
-import { Item } from "@/types";
-import { formatPrice } from "@/utils";
+import { Item } from "../../types";
+import { formatPrice } from "../../utils";
 import { FunctionComponent, useMemo } from "react";
 
 interface Props {
   item: Item;
-  onClick: VoidFunction;
+  onClick: () => void;
   quantityAdded?: number;
 }
 
