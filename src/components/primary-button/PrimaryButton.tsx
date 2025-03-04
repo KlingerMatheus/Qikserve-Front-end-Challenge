@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, FunctionComponent, JSX } from "react";
-import "./style.css";
+
+import "./primary-button.css";
 
 interface Props {
   label: string;

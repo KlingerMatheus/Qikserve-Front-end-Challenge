@@ -83,3 +83,5 @@ export type UpdateQuantityAction = {
   type: "decrement" | "increment" | "customIncrement";
   quantity?: number;
 };
+
+export type Device = "mobile" | "tablet" | "laptop" | "desktop";

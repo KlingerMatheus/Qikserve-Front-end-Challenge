@@ -5,8 +5,10 @@ import {
   FunctionComponent,
   SetStateAction,
 } from "react";
-import "./style.css";
+
 import { SearchIcon } from "lucide-react";
+
+import "./search-bar.css";
 
 interface Props {
   placeholder?: string;

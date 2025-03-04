@@ -1,9 +1,10 @@
 import { FunctionComponent } from "react";
+
 import { LeftArrowIcon } from "@/assets/icons";
-import { PrimaryButton } from "../primary-button";
+import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
 import PageInMaintenanceImage from "../../assets/page-in-maintenance.webp";
 
-import "./style.css";
+import "./page-in-maintenance.css";
 
 interface Props {
   pageExists?: boolean;

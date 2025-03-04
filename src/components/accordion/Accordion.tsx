@@ -1,6 +1,8 @@
-import { ChevronUpIcon } from "@/assets/icons";
 import { FunctionComponent, PropsWithChildren } from "react";
-import "./style.css";
+
+import { ChevronUpIcon } from "@/assets/icons";
+
+import "./accordion.css";
 
 interface RootProps {
   title: string;

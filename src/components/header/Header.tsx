@@ -1,8 +1,9 @@
 import BurgerHeader from "@/assets/burger-header.webp";
 import BurgerLogo from "@/assets/burger-logo.webp";
-import "./style.css";
 
-const Header = () => {
+import "./header.css";
+
+export const Header = () => {
   return (
     <div className="header-container">
       <div className="overlay-background" />
@@ -16,5 +17,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;

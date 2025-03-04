@@ -85,9 +85,12 @@ const cartSlice = createSlice({
 
         return item.id !== id || item.selectedModifierId !== modifierId;
       });
+
+      state.totalPrice = calculateTotalPrice(state.items);
     },
     cartRemoveAllItems: (state) => {
       state.items = [];
+      state.totalPrice = 0;
     },
     cartSetSelectedItem: (state, action: PayloadAction<Item>) => {
       state.selectedItem = action.payload;
