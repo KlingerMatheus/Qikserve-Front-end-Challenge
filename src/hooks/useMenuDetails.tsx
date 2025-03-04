@@ -10,8 +10,6 @@ function useMenuDetails() {
       ? process.env.REACT_APP_API_URL
       : "/api";
 
-  console.log(apiUrl);
-
   useEffect(() => {
     let fetchUrl = `${apiUrl}/menu`;
 
