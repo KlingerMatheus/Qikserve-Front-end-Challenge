@@ -16,6 +16,7 @@ import { CartItem } from "./CartItem.component";
 import { PrimaryButton } from "@/components/primary-button";
 import { formatPrice } from "@/utils";
 import { CartMobile } from "./cart-mobile";
+import { SearchBar } from "@/components/search-bar";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
@@ -25,7 +26,7 @@ const MenuPage = () => {
 
   const [activeSectionId, setActiveSectionId] = useState<number | null>(null);
   const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
-  const [search] = useState("");
+  const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const device = useBreakpoints();
@@ -52,6 +53,13 @@ const MenuPage = () => {
     <Accordion key={section.id} title={section.name} defaultOpen>
       <div className="menu-list-items">
         {section.items.map((item) => {
+          if (
+            search &&
+            !item.name.toLowerCase().includes(search.toLowerCase())
+          ) {
+            return;
+          }
+
           const cartItem = cartItems.filter(
             (cartItem) => cartItem.id === item.id
           );
@@ -81,72 +89,75 @@ const MenuPage = () => {
   return (
     <>
       {isModalOpen && <Modal closeModal={handleCloseModal} />}
-      <PageSection
-        style={{
-          maxWidth: isLaptopOrDesktop ? 600 : "100%",
-        }}
-      >
-        <div className="menu-list-header">
-          {menuDetails
-            ? menuDetails.sections.map((section) => (
-                <MenuSectionItem
-                  activeSectionId={activeSectionId}
-                  onClick={() => setActiveSectionId(section.id)}
-                  section={section}
-                  key={section.id}
-                />
-              ))
-            : "Nothing available"}
-        </div>
-        <div className="menu-list-sections">
-          {menuDetails?.sections.map((section) => {
-            const isSectionActive = section.id === activeSectionId;
 
-            if (!search && isSectionActive) {
-              return renderAccordion(section);
-            } else if (search) {
-              return renderAccordion(section);
-            }
+      <SearchBar onSearch={setSearch} placeholder="Search menu items" />
 
-            return null;
-          })}
-        </div>
-        <div className="view-allergy-link">
-          <span>View allergy information</span>
-        </div>
-      </PageSection>
-      {isLaptopOrDesktop && (
+      <div className="page-menu-container">
         <PageSection
           style={{
-            minWidth: 320,
-            maxWidth: 320,
-            height: "min-content",
+            maxWidth: isLaptopOrDesktop ? 600 : "100%",
           }}
         >
-          <PageSectionHeader title="Carrinho" />
-          {!cartItems.length ? (
-            <div className="empty-cart">Seu carrinho está vazio</div>
-          ) : (
-            <div className="cart-list-items">
-              {cartItems.map((item) => (
-                <CartItem
-                  key={`${item.id}-${item.selectedModifierId}`}
-                  item={item}
-                />
-              ))}
-            </div>
-          )}
+          <div className="menu-list-header">
+            {menuDetails
+              ? menuDetails.sections.map((section) => (
+                  <MenuSectionItem
+                    activeSectionId={activeSectionId}
+                    onClick={() => setActiveSectionId(section.id)}
+                    section={section}
+                    key={section.id}
+                  />
+                ))
+              : "Nothing available"}
+          </div>
+          <div className="menu-list-sections">
+            {menuDetails?.sections.map((section) => {
+              const isSectionActive = section.id === activeSectionId;
 
-          {cartItems.length > 0 && (
-            <PageSectionFooter>
-              <div className="cart-total-price-container">
-                <span className="label">Total:</span>{" "}
-                <span className="price">{formatPrice(totalPrice)}</span>
-              </div>
-            </PageSectionFooter>
-          )}
+              if (isSectionActive) {
+                return renderAccordion(section);
+              }
+
+              return null;
+            })}
+          </div>
+          <div className="view-allergy-link">
+            <span>View allergy information</span>
+          </div>
         </PageSection>
-      )}
+        {isLaptopOrDesktop && (
+          <PageSection
+            style={{
+              minWidth: 320,
+              maxWidth: 320,
+              height: "min-content",
+            }}
+          >
+            <PageSectionHeader title="Carrinho" />
+            {!cartItems.length ? (
+              <div className="empty-cart">Seu carrinho está vazio</div>
+            ) : (
+              <div className="cart-list-items">
+                {cartItems.map((item) => (
+                  <CartItem
+                    key={`${item.id}-${item.selectedModifierId}`}
+                    item={item}
+                  />
+                ))}
+              </div>
+            )}
+
+            {cartItems.length > 0 && (
+              <PageSectionFooter>
+                <div className="cart-total-price-container">
+                  <span className="label">Total:</span>{" "}
+                  <span className="price">{formatPrice(totalPrice)}</span>
+                </div>
+              </PageSectionFooter>
+            )}
+          </PageSection>
+        )}
+      </div>
 
       {!isLaptopOrDesktop && cartItems.length > 0 && (
         <div className="basket-shortcut-container">
