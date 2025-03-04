@@ -36,6 +36,7 @@ const CartMobileContainer: FunctionComponent<Props> = ({
 
   return (
     isOpen &&
+    cartItems.length > 0 &&
     isMobileOrTablet && (
       <div className="cart-mobile-container">
         <div className="cart-mobile-header">
