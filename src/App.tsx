@@ -1,13 +1,15 @@
-import { Navbar } from "./components/navbar";
-import "./global.css";
-import { useNavigate } from "@/hooks";
-import ContactPage from "./pages/contact";
-import LoginPage from "./pages/login";
-import MenuPage from "./pages/menu";
-import Header from "./components/header";
-import PageInMaintenance from "./components/page-in-maintenance";
 import { Provider } from "react-redux";
+
+import { Navbar } from "@/components/navbar/Navbar";
+import { Header } from "@/components/header/Header";
+import { useNavigate } from "@/hooks";
+import ContactPage from "@/pages/contact";
+import LoginPage from "@/pages/login";
+import MenuPage from "@/pages/menu";
+import PageInMaintenance from "./components/page-in-maintenance/PageInMaintenance";
 import store from "@/store";
+
+import "./global.css";
 
 const App = () => {
   const { route } = useNavigate();

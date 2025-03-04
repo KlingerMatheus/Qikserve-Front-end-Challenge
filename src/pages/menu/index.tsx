@@ -1,22 +1,24 @@
-import { PageSection } from "@/components/page-section";
-import PageSectionFooter from "@/components/page-section/PageSectionFooter";
-import PageSectionHeader from "@/components/page-section/PageSectionHeader";
-import { Spinner } from "@/components/spinner";
-import { useBreakpoints, useMenuDetails } from "@/hooks";
 import { useEffect, useState } from "react";
-import { MenuItem } from "./MenuItem.component";
-import { Accordion } from "@/components/accordion";
-import "./style.css";
-import { MenuSectionItem } from "./MenuSectionItem.component";
-import { Item, RootState, Section } from "@/types";
-import { Modal } from "@/components/modal";
 import { useDispatch, useSelector } from "react-redux";
+
+import { useBreakpoints, useMenuDetails } from "@/hooks";
+
+import { Item, RootState, Section } from "@/types";
 import { cartSetSelectedItem } from "@/reducers/slices/cartSlice";
-import { CartItem } from "./CartItem.component";
-import { PrimaryButton } from "@/components/primary-button";
 import { formatPrice } from "@/utils";
-import { CartMobile } from "./cart-mobile";
-import { SearchBar } from "@/components/search-bar";
+
+import { CartMobile } from "./cart-mobile/CartMobile";
+import { Page } from "@/components/page-section";
+import { Spinner } from "@/components/spinner/Spinner";
+import { SearchBar } from "@/components/search-bar/SearchBar";
+import { Accordion } from "@/components/accordion/Accordion";
+import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
+import { CartItem } from "./CartItem.component";
+import { Modal } from "@/components/selected-item-modal/SelectedItemModal";
+import { MenuItem } from "./MenuItem.component";
+import { MenuSectionItem } from "./MenuSectionItem.component";
+
+import "./menu.css";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
@@ -29,8 +31,7 @@ const MenuPage = () => {
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const device = useBreakpoints();
-  const isLaptopOrDesktop = ["laptop", "desktop"].includes(device);
+  const { isLaptopOrDesktop } = useBreakpoints();
 
   useEffect(() => {
     const firstSection = menuDetails?.sections.find((section) => section.id);
@@ -41,7 +42,11 @@ const MenuPage = () => {
   }, [menuDetails]);
 
   if (isMenuLoading) {
-    return <Spinner />;
+    return (
+      <div style={{ marginTop: 48, width: "100%" }}>
+        <Spinner />
+      </div>
+    );
   }
 
   const setSelectedItem = (item: Item) => {
@@ -93,7 +98,7 @@ const MenuPage = () => {
       <SearchBar onSearch={setSearch} placeholder="Search menu items" />
 
       <div className="page-menu-container">
-        <PageSection
+        <Page.Root
           style={{
             maxWidth: isLaptopOrDesktop ? 600 : "100%",
           }}
@@ -124,16 +129,16 @@ const MenuPage = () => {
           <div className="view-allergy-link">
             <span>View allergy information</span>
           </div>
-        </PageSection>
+        </Page.Root>
         {isLaptopOrDesktop && (
-          <PageSection
+          <Page.Root
             style={{
               minWidth: 320,
               maxWidth: 320,
               height: "min-content",
             }}
           >
-            <PageSectionHeader title="Carrinho" />
+            <Page.Header title="Carrinho" />
             {!cartItems.length ? (
               <div className="empty-cart">Seu carrinho está vazio</div>
             ) : (
@@ -148,14 +153,14 @@ const MenuPage = () => {
             )}
 
             {cartItems.length > 0 && (
-              <PageSectionFooter>
+              <Page.Footer>
                 <div className="cart-total-price-container">
                   <span className="label">Total:</span>{" "}
                   <span className="price">{formatPrice(totalPrice)}</span>
                 </div>
-              </PageSectionFooter>
+              </Page.Footer>
             )}
-          </PageSection>
+          </Page.Root>
         )}
       </div>
 
