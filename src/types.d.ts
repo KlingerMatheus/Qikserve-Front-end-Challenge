@@ -79,5 +79,6 @@ export type RemoveItemAction = {
 export type UpdateQuantityAction = {
   id: number;
   modifierId?: number;
-  type: "decrement" | "increment";
+  type: "decrement" | "increment" | "customIncrement";
+  quantity?: number;
 };
