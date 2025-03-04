@@ -14,11 +14,11 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 html,
 body {
-  font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
   background-color: #eee;
@@ -67,13 +67,19 @@ input[type="radio"] {
   border-radius: var(--rounded-full);
   outline: none;
   position: relative;
+  transition: 250ms ease;
+
+  &:checked {
+    background: var(--brown);
+    border-color: var(--brown);
+  }
 }
 
 input[type="radio"]:checked::after {
   content: "";
-  width: 10px;
-  height: 10px;
-  background-color: #5f5f5f;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
