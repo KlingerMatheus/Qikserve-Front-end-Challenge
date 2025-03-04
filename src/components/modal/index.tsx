@@ -14,6 +14,7 @@ import { formatPrice } from "@/utils";
 import { PrimaryButton } from "../primary-button";
 import { useBreakpoints } from "@/hooks";
 import { cartAddNewItem } from "@/reducers/slices/cartSlice";
+import { MinusIcon, PlusIcon } from "lucide-react";
 
 interface Props {
   closeModal: VoidFunction;
@@ -54,7 +55,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
     closeModal();
   }
 
-  function amountAction(type: "increment" | "decrement") {
+  function quantityAction(type: "increment" | "decrement") {
     if (type === "decrement") setQuantity((prevState) => prevState - 1);
     else if (type === "increment") setQuantity((prevState) => prevState + 1);
 
@@ -100,7 +101,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
                     <div className="modifier-options-option-container">
                       <label htmlFor={item.id.toString()}>
                         <div className="modifier-options-option">
-                          <span className="option-name">{item.name}</span>{" "}
+                          <span className="option-name">{item.name}</span>
                           <span className="option-price">
                             {formatPrice(item.price)}
                           </span>
@@ -110,12 +111,12 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
                           id={item.id.toString()}
                           name="modifier-option"
                           value={item.id}
-                          onChange={() =>
+                          onChange={() => {
                             setSelectedOption({
                               modifierId: item.id,
                               unitPrice: item.price,
-                            })
-                          }
+                            });
+                          }}
                         />
                       </label>
                     </div>
@@ -128,15 +129,17 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
           selectedOption.modifierId ||
           isMobileOrTablet) && (
           <div className="container-add-order">
-            <div className="amount-control">
+            <div className="quantity-control">
               <button
                 disabled={quantity <= 1}
-                onClick={() => amountAction("decrement")}
+                onClick={() => quantityAction("decrement")}
               >
-                -
+                <MinusIcon />
               </button>
               <span>{quantity}</span>
-              <button onClick={() => amountAction("increment")}>+</button>
+              <button onClick={() => quantityAction("increment")}>
+                <PlusIcon />
+              </button>
             </div>
             <PrimaryButton
               disabled={totalPrice <= 0}
