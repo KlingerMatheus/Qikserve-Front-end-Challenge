@@ -10,6 +10,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialState: CartState = {
   items: [],
   selectedItem: undefined,
+  totalPrice: 0,
 };
 
 function itemExists(state: CartState, item: CartItem): CartItem | undefined {
@@ -54,6 +55,14 @@ function updateQuantity(
   return updateFn ? updateFn(item, action) : item.quantity;
 }
 
+function calculateTotalPrice(cartItems: CartItem[]) {
+  return cartItems.reduce(
+    (acc, cartItem) =>
+      acc + (cartItem.unitPrice ?? cartItem.price) * cartItem.quantity,
+    0
+  );
+}
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -67,6 +76,8 @@ const cartSlice = createSlice({
       }
 
       state.items.push(action.payload);
+
+      state.totalPrice = calculateTotalPrice(state.items);
     },
     cartRemoveItem: (state, action: PayloadAction<RemoveItemAction>) => {
       state.items = state.items.filter((item) => {
@@ -99,6 +110,8 @@ const cartSlice = createSlice({
 
         return item;
       });
+
+      state.totalPrice = calculateTotalPrice(state.items);
     },
   },
 });
