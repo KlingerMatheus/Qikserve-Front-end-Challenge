@@ -9,10 +9,11 @@ import {
 } from "react";
 import { CloseIcon } from "@/assets/icons";
 import { RootState } from "@/types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatPrice } from "@/utils";
 import { PrimaryButton } from "../primary-button";
 import { useBreakpoints } from "@/hooks";
+import { cartAddNewItem } from "@/reducers/slices/cartSlice";
 
 interface Props {
   closeModal: VoidFunction;
@@ -27,25 +28,35 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
   const selectedItem = useSelector(
     (state: RootState) => state.cart.selectedItem
   );
-  const [amount, setAmount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [selectedOption, setSelectedOption] = useState<SelectedOption>({
     unitPrice: selectedItem?.price,
   });
   const totalPrice = useMemo(
-    () => (selectedOption.unitPrice ?? 0) * amount,
-    [amount, selectedOption.unitPrice]
+    () => (selectedOption.unitPrice ?? 0) * quantity,
+    [quantity, selectedOption.unitPrice]
   );
   const device = useBreakpoints();
   const isMobileOrTablet = ["mobile", "tablet"].includes(device);
+  const dispatch = useDispatch();
 
   function handleAddItemToOrder() {
-    alert("Added");
+    if (!selectedItem) return;
+
+    dispatch(
+      cartAddNewItem({
+        ...selectedItem,
+        selectedModifierId: selectedOption.modifierId,
+        quantity,
+        unitPrice: selectedOption.unitPrice ?? 0,
+      })
+    );
     closeModal();
   }
 
   function amountAction(type: "increment" | "decrement") {
-    if (type === "decrement") setAmount((prevState) => prevState - 1);
-    else if (type === "increment") setAmount((prevState) => prevState + 1);
+    if (type === "decrement") setQuantity((prevState) => prevState - 1);
+    else if (type === "increment") setQuantity((prevState) => prevState + 1);
 
     return;
   }
@@ -119,12 +130,12 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
           <div className="container-add-order">
             <div className="amount-control">
               <button
-                disabled={amount <= 1}
+                disabled={quantity <= 1}
                 onClick={() => amountAction("decrement")}
               >
                 -
               </button>
-              <span>{amount}</span>
+              <span>{quantity}</span>
               <button onClick={() => amountAction("increment")}>+</button>
             </div>
             <PrimaryButton
