@@ -10,13 +10,16 @@ export default ({ mode }) => {
       "process.env": env,
     },
     server: {
-      proxy: {
-        "/api": {
-          target: "https://cdn-dev.preoday.com/challenge",
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
-        },
-      },
+      proxy:
+        mode === "development"
+          ? {
+              "/api": {
+                target: "https://cdn-dev.preoday.com/challenge",
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, ""),
+              },
+            }
+          : {},
     },
     plugins: [react()],
     resolve: {
