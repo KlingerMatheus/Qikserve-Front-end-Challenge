@@ -111,6 +111,21 @@
   line-height: 18.75px;
   letter-spacing: 0px;
   color: #121212;
+
+  .quantity-added {
+    width: 18px;
+    height: 18px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background-color: var(--brown);
+    margin-right: 8px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.41px;
+    text-align: center;
+    color: #fff;
+  }
 }
 
 .item-description {
@@ -160,6 +175,8 @@
 .cart-list-items {
   padding-block: 8px;
   border-bottom: 2px solid #eee;
+  max-height: 400px;
+  overflow: auto;
 
   .cart-list-items-item {
     padding: 8px 16px;
@@ -219,5 +236,41 @@
       height: 20px;
       padding: 0;
     }
+  }
+}
+
+.basket-shortcut-container {
+  position: sticky;
+  width: 100%;
+  bottom: 0;
+  height: 80px;
+  padding: 24px;
+  padding-top: 8px;
+  backdrop-filter: blur(4px);
+
+  button {
+    width: 100%;
+  }
+}
+
+.cart-total-price-container {
+  display: flex;
+  gap: 24px;
+  padding: 16px;
+  justify-content: space-between;
+  background-color: var(--background-gray);
+
+  .label {
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28.64px;
+    color: #121212;
+  }
+
+  .price {
+    font-size: 24px;
+    line-height: 28.13px;
+    text-align: right;
+    color: #121212;
   }
 }

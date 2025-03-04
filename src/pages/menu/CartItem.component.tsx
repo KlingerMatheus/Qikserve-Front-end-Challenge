@@ -4,6 +4,7 @@ import {
 } from "@/reducers/slices/cartSlice";
 import { CartItem as CartItemType, RemoveItemAction } from "@/types";
 import { findMatchingModifier, formatPrice } from "@/utils";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 
@@ -64,9 +65,13 @@ export const CartItem: FunctionComponent<Props> = ({ item }) => {
         </span>
       )}
       <div className="quantity-control-buttons">
-        <button onClick={decrementQuantity}>-</button>
+        <button onClick={decrementQuantity}>
+          <MinusIcon />
+        </button>
         <span className="quantity">{item.quantity}</span>
-        <button onClick={incrementQuantity}>+</button>
+        <button onClick={incrementQuantity}>
+          <PlusIcon />
+        </button>
       </div>
     </div>
   );
