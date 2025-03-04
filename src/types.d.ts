@@ -59,6 +59,7 @@ export interface Menu {
 export interface CartState {
   items: CartItem[];
   selectedItem?: Item;
+  totalPrice: number;
 }
 
 export interface RootState {
