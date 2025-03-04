@@ -48,6 +48,7 @@ export const PageSection: FunctionComponent<PropsWithChildren<Props>> = ({
 }) => {
   const validChildren = Children.toArray(children);
   const { header, footer, body } = separateChildren(validChildren);
+
   const mergedClassName = className
     ? `page-section ${className}`
     : "page-section";
