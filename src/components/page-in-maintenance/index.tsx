@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { LeftArrowIcon } from "@/assets/icons";
 import { PrimaryButton } from "../primary-button";
-import PageInMaintenanceImage from "../../assets/page-in-maintenance.png";
+import PageInMaintenanceImage from "../../assets/page-in-maintenance.webp";
 
 import "./style.css";
 
