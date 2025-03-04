@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-type Device = "mobile" | "tablet" | "laptop" | "desktop";
+import { Device } from "@/types";
 
 function useBreakpoints() {
   const [device, setDevice] = useState(getDevice());
@@ -31,7 +31,11 @@ function useBreakpoints() {
     }
   }
 
-  return device;
+  return {
+    device,
+    isMobileOrTablet: ["mobile", "tablet"].includes(device),
+    isLaptopOrDesktop: ["laptop", "desktop"].includes(device),
+  };
 }
 
 export default useBreakpoints;
