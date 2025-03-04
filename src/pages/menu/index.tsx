@@ -8,10 +8,11 @@ import { MenuItem } from "./MenuItem.component";
 import { Accordion } from "@/components/accordion";
 import "./style.css";
 import { MenuSectionItem } from "./MenuSectionItem.component";
-import { Item, Section } from "@/types";
+import { Item, RootState, Section } from "@/types";
 import { Modal } from "@/components/modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartSetSelectedItem } from "@/reducers/slices/cartSlice";
+import { CartItem } from "./CartItem.component";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
@@ -21,6 +22,7 @@ const MenuPage = () => {
   const isLaptopOrDesktop = ["laptop", "desktop"].includes(device);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
 
   useEffect(() => {
     const firstSection = menuDetails?.sections.find((section) => section.id);
@@ -93,7 +95,6 @@ const MenuPage = () => {
       </PageSection>
       {isLaptopOrDesktop && (
         <PageSection
-          className=""
           style={{
             minWidth: 320,
             maxWidth: 320,
@@ -101,7 +102,16 @@ const MenuPage = () => {
           }}
         >
           <PageSectionHeader title="Carrinho" />
-          <div className="empty-cart">Seu carrinho está vazio</div>
+          {!cartItems.length ? (
+            <div className="empty-cart">Seu carrinho está vazio</div>
+          ) : (
+            <div className="cart-list-items">
+              {cartItems.map((item) => (
+                <CartItem key={item.id} item={item} />
+              ))}
+            </div>
+          )}
+
           {/* <PageSectionFooter /> */}
         </PageSection>
       )}
