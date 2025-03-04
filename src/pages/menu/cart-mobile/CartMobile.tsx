@@ -1,14 +1,16 @@
 import { FunctionComponent } from "react";
-import "./style.css";
 import { createPortal } from "react-dom";
+
 import { useBreakpoints } from "@/hooks";
 import { CloseIcon, LeftArrowIcon } from "@/assets/icons";
 import { CartItem as CartItemType, RootState } from "@/types";
 import { CartItem } from "../CartItem.component";
 import { formatPrice } from "@/utils";
-import { PrimaryButton } from "@/components/primary-button";
+import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
 import { useDispatch, useSelector } from "react-redux";
 import { cartRemoveAllItems } from "@/reducers/slices/cartSlice";
+
+import "./cart-mobile.css";
 
 interface Props {
   isOpen?: boolean;
@@ -25,8 +27,7 @@ const CartMobileContainer: FunctionComponent<Props> = ({
 
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
 
-  const device = useBreakpoints();
-  const isMobileOrTablet = ["mobile", "tablet"].includes(device);
+  const { isMobileOrTablet } = useBreakpoints();
 
   function handleCheckout() {
     dispatch(cartRemoveAllItems());

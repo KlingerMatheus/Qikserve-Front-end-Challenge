@@ -1,5 +1,3 @@
-import { createPortal } from "react-dom";
-import "./style.css";
 import {
   FunctionComponent,
   PropsWithChildren,
@@ -7,14 +5,19 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
+
+import { MinusIcon, PlusIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { CloseIcon } from "@/assets/icons";
 import { RootState } from "@/types";
-import { useDispatch, useSelector } from "react-redux";
 import { formatPrice } from "@/utils";
-import { PrimaryButton } from "../primary-button";
 import { useBreakpoints } from "@/hooks";
 import { cartAddNewItem } from "@/reducers/slices/cartSlice";
-import { MinusIcon, PlusIcon } from "lucide-react";
+import { PrimaryButton } from "@/components/primary-button/PrimaryButton";
+
+import "./selected-item-modal.css";
 
 interface Props {
   closeModal: VoidFunction;
@@ -37,8 +40,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
     () => (selectedOption.unitPrice ?? 0) * quantity,
     [quantity, selectedOption.unitPrice]
   );
-  const device = useBreakpoints();
-  const isMobileOrTablet = ["mobile", "tablet"].includes(device);
+  const { isMobileOrTablet } = useBreakpoints();
   const dispatch = useDispatch();
 
   function handleAddItemToOrder() {

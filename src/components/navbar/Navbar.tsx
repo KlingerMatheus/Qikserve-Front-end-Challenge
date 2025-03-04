@@ -1,14 +1,15 @@
 import { FC, useState } from "react";
+import { createPortal } from "react-dom";
+
 import { NAVBAR_ITEMS } from "./constants";
 import { useBreakpoints, useNavigate } from "@/hooks/index";
 import { CloseIcon, LeftArrowIcon, MenuIcon } from "@/assets/icons";
-import { createPortal } from "react-dom";
-import "./style.css";
+
+import "./navbar.css";
 
 export const Navbar: FC = () => {
   const { route } = useNavigate();
-  const device = useBreakpoints();
-  const isMobileOrTablet = ["mobile", "tablet"].includes(device);
+  const { isMobileOrTablet } = useBreakpoints();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
