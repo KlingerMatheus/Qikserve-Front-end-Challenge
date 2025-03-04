@@ -9,17 +9,18 @@ export function formatPrice(price: number) {
 
 export function findMatchingModifier(
   modifierId?: number,
-  modifier?: Modifier[]
-) {
-  if (!modifierId || !modifier) {
+  modifiers?: Modifier[]
+): ModifierItem | undefined {
+  if (!modifierId || !modifiers) {
     return undefined;
   }
 
-  let foundModifier: ModifierItem | undefined;
+  for (const modifier of modifiers) {
+    const foundItem = modifier.items.find((item) => item.id === modifierId);
+    if (foundItem) {
+      return foundItem;
+    }
+  }
 
-  modifier.find(
-    (mod) => (foundModifier = mod.items.find((item) => item.id === modifierId))
-  )?.items;
-
-  return foundModifier;
+  return undefined;
 }

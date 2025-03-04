@@ -20,9 +20,7 @@
   background: #fff;
   display: flex;
   justify-content: space-between;
-  padding-top: 48px;
-  padding-inline: 16px;
-  padding-bottom: 18px;
+  padding: 16px;
   gap: 8px;
   border-bottom: 1px solid #dadada;
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useBreakpoints, useMenuDetails } from "@/hooks";
 
-import { Item, RootState, Section } from "@/types";
+import { CartItem as CartItemType, Item, RootState, Section } from "@/types";
 import { cartSetSelectedItem } from "@/reducers/slices/cartSlice";
 import { formatPrice } from "@/utils";
 
@@ -143,7 +143,7 @@ const MenuPage = () => {
               <div className="empty-cart">Seu carrinho está vazio</div>
             ) : (
               <div className="cart-list-items">
-                {cartItems.map((item) => (
+                {cartItems.map((item: CartItemType) => (
                   <CartItem
                     key={`${item.id}-${item.selectedModifierId}`}
                     item={item}
