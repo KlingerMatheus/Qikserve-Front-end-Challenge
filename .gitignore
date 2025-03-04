@@ -25,3 +25,6 @@ dist-ssr
 
 # Dependencies version
 package-lock.json
+
+# Environment Variables
+.env
