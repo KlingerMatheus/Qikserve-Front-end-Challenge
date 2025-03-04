@@ -15,8 +15,6 @@ function useMenuDetails() {
 
     fetch(fetchUrl)
       .then((response) => {
-        const origin = response.headers.get("Access-Control-Allow-Origin");
-        console.log("Access-Control-Allow-Origin:", origin);
         if (!response.ok) {
           throw new Error("Error on requesting from API");
         }
