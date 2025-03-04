@@ -5,15 +5,9 @@ import { Menu } from "../types";
 function useMenuDetails() {
   const [menuDetails, setMenuDetails] = useState<Menu | null>();
   const [isMenuLoading, setIsMenuLoading] = useState(true);
-  const apiUrl =
-    import.meta.env.MODE === "production"
-      ? process.env.REACT_APP_API_URL
-      : "/api";
 
   useEffect(() => {
-    let fetchUrl = `${apiUrl}/menu`;
-
-    fetch(fetchUrl)
+    fetch("/api/menu")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error on requesting from API");
