@@ -45,9 +45,7 @@ section {
 .page-container {
   max-width: 1024px;
   width: 100%;
-  background-color: var(--background-gray);
   display: flex;
-  padding: 32px 40px;
   gap: 24px;
   position: relative;
   flex-wrap: wrap;
