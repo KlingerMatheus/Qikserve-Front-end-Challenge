@@ -145,7 +145,7 @@
   backdrop-filter: blur(3px);
   animation: fadeIn 500ms forwards;
 
-  .amount-control {
+  .quantity-control {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,7 +160,7 @@
     }
 
     button {
-      display: block;
+      /* display: block; */
       font-size: 32px;
       padding: 0px;
       width: 32px;

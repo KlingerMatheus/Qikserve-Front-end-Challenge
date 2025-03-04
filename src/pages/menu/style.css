@@ -111,6 +111,21 @@
   line-height: 18.75px;
   letter-spacing: 0px;
   color: #121212;
+
+  .quantity-added {
+    width: 18px;
+    height: 18px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background-color: var(--brown);
+    margin-right: 8px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.41px;
+    text-align: center;
+    color: #fff;
+  }
 }
 
 .item-description {
@@ -154,5 +169,108 @@
     text-decoration-thickness: Auto;
     cursor: pointer;
     color: var(--brown);
+  }
+}
+
+.cart-list-items {
+  padding-block: 8px;
+  border-bottom: 2px solid #eee;
+  max-height: 400px;
+  overflow: auto;
+
+  .cart-list-items-item {
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .item-details {
+      display: flex;
+      justify-content: space-between;
+
+      .item-name {
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 18.75px;
+        letter-spacing: 0px;
+        color: #121212;
+      }
+
+      .item-price {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 18.75px;
+        letter-spacing: 0.5px;
+        text-align: right;
+        color: #121212;
+      }
+    }
+  }
+
+  .cart-item-option-description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18.75px;
+    letter-spacing: 0px;
+    color: #5f5f5f;
+  }
+
+  .quantity-control-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+
+    .quantity {
+      min-width: 30px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 18.75px;
+      text-align: center;
+      color: #121212;
+    }
+
+    button {
+      width: 20px;
+      height: 20px;
+      padding: 0;
+    }
+  }
+}
+
+.basket-shortcut-container {
+  position: sticky;
+  width: 100%;
+  bottom: 0;
+  height: 80px;
+  padding: 24px;
+  padding-top: 8px;
+  backdrop-filter: blur(4px);
+
+  button {
+    width: 100%;
+  }
+}
+
+.cart-total-price-container {
+  display: flex;
+  gap: 24px;
+  padding: 16px;
+  justify-content: space-between;
+  background-color: var(--background-gray);
+
+  .label {
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28.64px;
+    color: #121212;
+  }
+
+  .price {
+    font-size: 24px;
+    line-height: 28.13px;
+    text-align: right;
+    color: #121212;
   }
 }

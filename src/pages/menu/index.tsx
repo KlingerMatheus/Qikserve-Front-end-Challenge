@@ -8,19 +8,28 @@ import { MenuItem } from "./MenuItem.component";
 import { Accordion } from "@/components/accordion";
 import "./style.css";
 import { MenuSectionItem } from "./MenuSectionItem.component";
-import { Item, Section } from "@/types";
+import { Item, RootState, Section } from "@/types";
 import { Modal } from "@/components/modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartSetSelectedItem } from "@/reducers/slices/cartSlice";
+import { CartItem } from "./CartItem.component";
+import { PrimaryButton } from "@/components/primary-button";
+import { formatPrice } from "@/utils";
+import { CartMobile } from "./cart-mobile";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+
   const [activeSectionId, setActiveSectionId] = useState<number | null>(null);
+  const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
   const [search] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const device = useBreakpoints();
   const isLaptopOrDesktop = ["laptop", "desktop"].includes(device);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const firstSection = menuDetails?.sections.find((section) => section.id);
@@ -42,13 +51,27 @@ const MenuPage = () => {
   const renderAccordion = (section: Section) => (
     <Accordion key={section.id} title={section.name} defaultOpen>
       <div className="menu-list-items">
-        {section.items.map((item) => (
-          <MenuItem
-            onClick={() => setSelectedItem(item)}
-            key={item.id}
-            item={item}
-          />
-        ))}
+        {section.items.map((item) => {
+          const cartItem = cartItems.filter(
+            (cartItem) => cartItem.id === item.id
+          );
+          const cartItemQuantity =
+            cartItem.length > 1
+              ? cartItem.reduce(
+                  (acc, currentValue) => acc + currentValue.quantity,
+                  0
+                )
+              : cartItem[0]?.quantity;
+
+          return (
+            <MenuItem
+              onClick={() => setSelectedItem(item)}
+              key={`menu-option-${item.id}`}
+              item={item}
+              quantityAdded={cartItemQuantity}
+            />
+          );
+        })}
       </div>
     </Accordion>
   );
@@ -59,8 +82,9 @@ const MenuPage = () => {
     <>
       {isModalOpen && <Modal closeModal={handleCloseModal} />}
       <PageSection
-        style={{ maxWidth: isLaptopOrDesktop ? 600 : "100%" }}
-        className="page-section-menu-list"
+        style={{
+          maxWidth: isLaptopOrDesktop ? 600 : "100%",
+        }}
       >
         <div className="menu-list-header">
           {menuDetails
@@ -93,7 +117,6 @@ const MenuPage = () => {
       </PageSection>
       {isLaptopOrDesktop && (
         <PageSection
-          className=""
           style={{
             minWidth: 320,
             maxWidth: 320,
@@ -101,10 +124,44 @@ const MenuPage = () => {
           }}
         >
           <PageSectionHeader title="Carrinho" />
-          <div className="empty-cart">Seu carrinho está vazio</div>
-          {/* <PageSectionFooter /> */}
+          {!cartItems.length ? (
+            <div className="empty-cart">Seu carrinho está vazio</div>
+          ) : (
+            <div className="cart-list-items">
+              {cartItems.map((item) => (
+                <CartItem
+                  key={`${item.id}-${item.selectedModifierId}`}
+                  item={item}
+                />
+              ))}
+            </div>
+          )}
+
+          {cartItems.length > 0 && (
+            <PageSectionFooter>
+              <div className="cart-total-price-container">
+                <span className="label">Total:</span>{" "}
+                <span className="price">{formatPrice(totalPrice)}</span>
+              </div>
+            </PageSectionFooter>
+          )}
         </PageSection>
       )}
+
+      {!isLaptopOrDesktop && cartItems.length > 0 && (
+        <div className="basket-shortcut-container">
+          <PrimaryButton
+            label={`Your basket • ${cartItems.length} items`}
+            onClick={() => setIsCartMobileOpen(true)}
+          />
+        </div>
+      )}
+
+      <CartMobile
+        isOpen={isCartMobileOpen}
+        closeCart={() => setIsCartMobileOpen(false)}
+        cartItems={cartItems}
+      />
     </>
   );
 };

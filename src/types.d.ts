@@ -57,10 +57,29 @@ export interface Menu {
 }
 
 export interface CartState {
-  items: Item[];
+  items: CartItem[];
   selectedItem?: Item;
+  totalPrice: number;
 }
 
 export interface RootState {
   cart: CartState;
 }
+
+export type CartItem = Item & {
+  selectedModifierId?: number;
+  unitPrice: number;
+  quantity: number;
+};
+
+export type RemoveItemAction = {
+  id: number;
+  modifierId?: number;
+};
+
+export type UpdateQuantityAction = {
+  id: number;
+  modifierId?: number;
+  type: "decrement" | "increment" | "customIncrement";
+  quantity?: number;
+};

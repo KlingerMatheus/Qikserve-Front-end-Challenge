@@ -125,10 +125,11 @@
 
 @media (max-width: 960px) {
   .navbar {
-    height: 64px;
+    height: 94px;
     width: 100%;
     gap: 8px;
     padding: 14px 16px;
+    padding-top: 48px;
     justify-content: space-between;
     align-items: center;
   }

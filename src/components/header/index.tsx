@@ -1,5 +1,5 @@
-import BurgerHeader from "@/assets/burger-header.jpeg";
-import BurgerLogo from "@/assets/burger-logo.png";
+import BurgerHeader from "@/assets/burger-header.webp";
+import BurgerLogo from "@/assets/burger-logo.webp";
 import "./style.css";
 
 const Header = () => {

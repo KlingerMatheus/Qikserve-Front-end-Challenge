@@ -9,10 +9,12 @@ import {
 } from "react";
 import { CloseIcon } from "@/assets/icons";
 import { RootState } from "@/types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatPrice } from "@/utils";
 import { PrimaryButton } from "../primary-button";
 import { useBreakpoints } from "@/hooks";
+import { cartAddNewItem } from "@/reducers/slices/cartSlice";
+import { MinusIcon, PlusIcon } from "lucide-react";
 
 interface Props {
   closeModal: VoidFunction;
@@ -27,25 +29,35 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
   const selectedItem = useSelector(
     (state: RootState) => state.cart.selectedItem
   );
-  const [amount, setAmount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [selectedOption, setSelectedOption] = useState<SelectedOption>({
     unitPrice: selectedItem?.price,
   });
   const totalPrice = useMemo(
-    () => (selectedOption.unitPrice ?? 0) * amount,
-    [amount, selectedOption.unitPrice]
+    () => (selectedOption.unitPrice ?? 0) * quantity,
+    [quantity, selectedOption.unitPrice]
   );
   const device = useBreakpoints();
   const isMobileOrTablet = ["mobile", "tablet"].includes(device);
+  const dispatch = useDispatch();
 
   function handleAddItemToOrder() {
-    alert("Added");
+    if (!selectedItem) return;
+
+    dispatch(
+      cartAddNewItem({
+        ...selectedItem,
+        selectedModifierId: selectedOption.modifierId,
+        quantity,
+        unitPrice: selectedOption.unitPrice ?? 0,
+      })
+    );
     closeModal();
   }
 
-  function amountAction(type: "increment" | "decrement") {
-    if (type === "decrement") setAmount((prevState) => prevState - 1);
-    else if (type === "increment") setAmount((prevState) => prevState + 1);
+  function quantityAction(type: "increment" | "decrement") {
+    if (type === "decrement") setQuantity((prevState) => prevState - 1);
+    else if (type === "increment") setQuantity((prevState) => prevState + 1);
 
     return;
   }
@@ -89,7 +101,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
                     <div className="modifier-options-option-container">
                       <label htmlFor={item.id.toString()}>
                         <div className="modifier-options-option">
-                          <span className="option-name">{item.name}</span>{" "}
+                          <span className="option-name">{item.name}</span>
                           <span className="option-price">
                             {formatPrice(item.price)}
                           </span>
@@ -99,12 +111,12 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
                           id={item.id.toString()}
                           name="modifier-option"
                           value={item.id}
-                          onChange={() =>
+                          onChange={() => {
                             setSelectedOption({
                               modifierId: item.id,
                               unitPrice: item.price,
-                            })
-                          }
+                            });
+                          }}
                         />
                       </label>
                     </div>
@@ -117,15 +129,17 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
           selectedOption.modifierId ||
           isMobileOrTablet) && (
           <div className="container-add-order">
-            <div className="amount-control">
+            <div className="quantity-control">
               <button
-                disabled={amount <= 1}
-                onClick={() => amountAction("decrement")}
+                disabled={quantity <= 1}
+                onClick={() => quantityAction("decrement")}
               >
-                -
+                <MinusIcon />
               </button>
-              <span>{amount}</span>
-              <button onClick={() => amountAction("increment")}>+</button>
+              <span>{quantity}</span>
+              <button onClick={() => quantityAction("increment")}>
+                <PlusIcon />
+              </button>
             </div>
             <PrimaryButton
               disabled={totalPrice <= 0}
