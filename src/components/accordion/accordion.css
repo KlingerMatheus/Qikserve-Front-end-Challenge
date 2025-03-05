@@ -28,7 +28,7 @@ summary {
   span {
     display: flex;
     align-items: center;
-    color: #4f372f;
+    color: var(--primary-color);
     transition: all 0.2s ease-in;
     transform-origin: center;
     transform: rotateX(180deg);

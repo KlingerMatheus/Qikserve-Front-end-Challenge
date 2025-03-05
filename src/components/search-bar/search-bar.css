@@ -17,10 +17,11 @@
   padding-bottom: 11px;
   appearance: none;
   background-color: #fff;
+  min-width: 0px;
 
   flex-grow: 1;
 
-  border: 1px solid #8a94a4;
+  border: 1px solid var(--placeholder);
   border-radius: 0;
   border-bottom-right-radius: 8px;
   border-top-right-radius: 8px;
@@ -37,7 +38,7 @@
   }
 
   &::placeholder {
-    color: #8a94a4;
+    color: var(--placeholder);
   }
 
   &::-webkit-search-cancel-button {
@@ -57,9 +58,9 @@
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 
-  color: #8a94a4;
+  color: var(--placeholder);
   background: #fff;
-  border: 1px solid #8a94a4;
+  border: 1px solid var(--placeholder);
   border-right-width: 0;
 }
 
