@@ -1,10 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 import { getWebSettings } from "../api/getTheme";
+import { useDispatch } from "react-redux";
+import { venueActions } from "../reducers/slices/venueSlice";
 
 async function applyThemeAndMetaTags(
   venueId: string,
   setPageIsLoading: Dispatch<SetStateAction<boolean>>
 ) {
+  const dispatch = useDispatch();
+
   try {
     const data = await getWebSettings(venueId);
 
@@ -58,6 +62,8 @@ async function applyThemeAndMetaTags(
         "#333"
       );
     }
+
+    dispatch(venueActions.addVenueData(data));
   } catch (error) {
     console.error("Error fetching API data:", error);
   }
