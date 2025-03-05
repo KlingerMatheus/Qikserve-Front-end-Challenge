@@ -1,13 +1,14 @@
-import { Modifier, ModifierItem } from "./types";
+import { Modifier, ModifierItem } from "../types";
+import applyThemeAndMetaTags from "./applyThemeAndMetaTags";
 
-export function formatPrice(price: number) {
+function formatPrice(price: number) {
   return `R$${price.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
 }
 
-export function findMatchingModifier(
+function findMatchingModifier(
   modifierId?: number,
   modifiers?: Modifier[]
 ): ModifierItem | undefined {
@@ -24,3 +25,5 @@ export function findMatchingModifier(
 
   return undefined;
 }
+
+export { applyThemeAndMetaTags, findMatchingModifier, formatPrice };
