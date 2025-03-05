@@ -1,8 +1,10 @@
 import { Modifier, ModifierItem } from "../types";
 import applyThemeAndMetaTags from "./applyThemeAndMetaTags";
 
-function formatPrice(price: number) {
-  return `R$${price.toLocaleString("pt-BR", {
+function formatPrice(price: number, currency?: string) {
+  const locale = localStorage.getItem("i18nextLng") ?? "en-US";
+
+  return `${currency ?? "$"}${price.toLocaleString(locale, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
