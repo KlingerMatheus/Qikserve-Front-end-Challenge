@@ -1,6 +1,3 @@
-import { Provider } from "react-redux";
-
-import store from "./store";
 import { useNavigate } from "./hooks";
 import MenuPage from "./pages/menu";
 import PageInMaintenance from "./components/page-in-maintenance/PageInMaintenance";
@@ -60,9 +57,7 @@ const App = () => {
       <Navbar />
       <Header />
       <section>
-        <Provider store={store}>
-          <div className="page-container">{renderPage()}</div>
-        </Provider>
+        <div className="page-container">{renderPage()}</div>
       </section>
     </main>
   );
