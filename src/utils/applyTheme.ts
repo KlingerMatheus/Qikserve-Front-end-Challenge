@@ -1,7 +1,7 @@
-import { getThemeData } from "../api/getTheme.ts";
+import { getWebSettings } from "../api/getTheme.ts";
 
 export async function applyTheme(venueId: string) {
-  const venueData = await getThemeData(venueId);
+  const venueData = await getWebSettings(venueId);
 
   if (venueData && venueData.webSettings) {
     const {
