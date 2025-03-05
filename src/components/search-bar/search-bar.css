@@ -15,10 +15,13 @@
   padding-top: 13px;
   padding-right: 12px;
   padding-bottom: 11px;
+  appearance: none;
 
   flex-grow: 1;
 
   border: 1px solid #8a94a4;
+  border-radius: 0;
+  border-bottom-right-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border-left-width: 0;
@@ -34,6 +37,10 @@
 
   &::placeholder {
     color: #8a94a4;
+  }
+
+  &::-webkit-search-cancel-button {
+    appearance: none;
   }
 }
 
