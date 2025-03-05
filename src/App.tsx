@@ -1,17 +1,20 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import "./i18n";
+
 import { useNavigate } from "./hooks";
-import MenuPage from "./pages/menu";
 import PageInMaintenance from "./components/page-in-maintenance/PageInMaintenance";
 import { Header } from "./components/header/Header";
 import { Navbar } from "./components/navbar/Navbar";
+import { Spinner } from "./components/spinner/Spinner";
+
+import MenuPage from "./pages/menu";
 import ContactPage from "./pages/contact";
 import LoginPage from "./pages/login";
 
 import { applyThemeAndMetaTags } from "./utils";
 
 import "./global.css";
-import { useState } from "react";
-import { Spinner } from "./components/spinner/Spinner";
-import { useDispatch } from "react-redux";
 
 const App = () => {
   const { route } = useNavigate();
