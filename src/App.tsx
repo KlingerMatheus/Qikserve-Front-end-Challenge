@@ -11,10 +11,12 @@ import { applyThemeAndMetaTags } from "./utils";
 import "./global.css";
 import { useState } from "react";
 import { Spinner } from "./components/spinner/Spinner";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const { route } = useNavigate();
   const [isPageLoading, setIsPageLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const renderPage = () => {
     switch (route) {
@@ -33,7 +35,7 @@ const App = () => {
     }
   };
 
-  applyThemeAndMetaTags("9", setIsPageLoading);
+  applyThemeAndMetaTags("9", setIsPageLoading, dispatch);
 
   if (isPageLoading) {
     return (

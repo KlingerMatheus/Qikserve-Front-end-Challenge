@@ -1,14 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 import { getWebSettings } from "../api/getTheme";
-import { useDispatch } from "react-redux";
 import { venueActions } from "../reducers/slices/venueSlice";
+import { UnknownAction } from "@reduxjs/toolkit";
 
 async function applyThemeAndMetaTags(
   venueId: string,
-  setPageIsLoading: Dispatch<SetStateAction<boolean>>
+  setPageIsLoading: Dispatch<SetStateAction<boolean>>,
+  dispatch: Dispatch<UnknownAction>
 ) {
-  const dispatch = useDispatch();
-
   try {
     const data = await getWebSettings(venueId);
 
