@@ -17,6 +17,7 @@
   padding-bottom: 11px;
   appearance: none;
   background-color: #fff;
+  min-width: 0px;
 
   flex-grow: 1;
 
