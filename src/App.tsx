@@ -1,16 +1,16 @@
 import { Provider } from "react-redux";
 
-import PageInMaintenance from "./components/page-in-maintenance/PageInMaintenance";
-
 import store from "./store";
 import { useNavigate } from "./hooks";
 import MenuPage from "./pages/menu";
+import PageInMaintenance from "./components/page-in-maintenance/PageInMaintenance";
 import { Header } from "./components/header/Header";
 import { Navbar } from "./components/navbar/Navbar";
 import ContactPage from "./pages/contact";
 import LoginPage from "./pages/login";
 
 import "./global.css";
+import { applyTheme } from "./utils/applyTheme";
 
 const App = () => {
   const { route } = useNavigate();
@@ -31,6 +31,8 @@ const App = () => {
       }
     }
   };
+
+  applyTheme("9");
 
   return (
     <main>

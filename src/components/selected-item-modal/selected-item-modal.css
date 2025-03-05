@@ -18,7 +18,7 @@
   max-height: 80vh;
   top: 63px;
   width: 480px;
-  background: #fff;
+  background: var(--background-color);
 
   img {
     width: 100%;
@@ -41,7 +41,7 @@
 .close-button {
   background: #fff;
   box-shadow: 0px 2px 2px 0px #0000001f;
-  color: var(--brown);
+  color: var(--primary-color);
   width: 28px;
   height: 28px;
   display: block;
@@ -68,7 +68,7 @@
     font-size: 24px;
     line-height: 28.13px;
     letter-spacing: 0px;
-    color: #121212;
+    color: var(--dark-gray);
     margin: 0;
   }
 
@@ -100,7 +100,7 @@
 
   .modifier-limit {
     font-weight: 400;
-    color: #5f5f5f;
+    color: var(--default-text);
   }
 }
 
@@ -123,7 +123,7 @@
 
       .option-name {
         font-weight: 500;
-        color: #121212;
+        color: var(--dark-gray);
       }
 
       .option-price {

@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  background-color: var(--brown);
+  background-color: var(--nav-background-color);
   display: flex;
   justify-content: center;
   transition: ease-in-out 100ms;
@@ -55,7 +55,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--lighter-brown);
+      background-color: var(--primary-color-hover);
     }
   }
 
