@@ -6,11 +6,13 @@ import { useBreakpoints, useNavigate } from "../../hooks/index";
 import { CloseIcon, LeftArrowIcon, MenuIcon } from "../../assets/icons";
 
 import "./navbar.css";
+import { useTranslation } from "react-i18next";
 
 export const Navbar: FC = () => {
   const { route } = useNavigate();
   const { isMobileOrTablet } = useBreakpoints();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation("common");
 
   return (
     <>
@@ -35,7 +37,7 @@ export const Navbar: FC = () => {
 
               return (
                 <li key={item.name} className={isActive ? "active" : ""}>
-                  <a href={item.path}>{item.name}</a>
+                  <a href={item.path}>{t(`common:nav.${item.name}`)}</a>
                   {isActive && <span />}
                 </li>
               );

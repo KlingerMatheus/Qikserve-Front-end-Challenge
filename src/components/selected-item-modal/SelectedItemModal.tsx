@@ -18,6 +18,7 @@ import { cartAddNewItem } from "../../reducers/slices/cartSlice";
 import { PrimaryButton } from "../../components/primary-button/PrimaryButton";
 
 import "./selected-item-modal.css";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   closeModal: () => void;
@@ -42,6 +43,10 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
   );
   const { isMobileOrTablet } = useBreakpoints();
   const dispatch = useDispatch();
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
+  const { t } = useTranslation("menu");
 
   function handleAddItemToOrder() {
     if (!selectedItem) return;
@@ -105,7 +110,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
                         <div className="modifier-options-option">
                           <span className="option-name">{item.name}</span>
                           <span className="option-price">
-                            {formatPrice(item.price)}
+                            {formatPrice(item.price, currency)}
                           </span>
                         </div>
                         <input
@@ -146,7 +151,9 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
             <PrimaryButton
               disabled={totalPrice <= 0}
               onClick={handleAddItemToOrder}
-              label={`Add to order • ${formatPrice(totalPrice)}`}
+              label={t("addToOrder", {
+                price: formatPrice(totalPrice, currency),
+              })}
             />
           </div>
         )}

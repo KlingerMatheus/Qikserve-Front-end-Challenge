@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Section } from "../../types";
 import { FunctionComponent } from "react";
 
@@ -12,6 +13,9 @@ export const MenuSectionItem: FunctionComponent<Props> = ({
   onClick,
   activeSectionId,
 }) => {
+  const { t } = useTranslation("menu");
+  const tSectionName = t(`itemType.${section.name.toLowerCase()}`);
+
   return (
     <div
       className="menu-list-header-option"
@@ -19,8 +23,8 @@ export const MenuSectionItem: FunctionComponent<Props> = ({
       onClick={onClick}
       data-isactive={section.id === activeSectionId ? true : null}
     >
-      <img src={section.images?.[0].image} alt={section.name} />
-      <span>{section.name}</span>
+      <img src={section.images?.[0].image} alt={tSectionName} />
+      <span>{tSectionName}</span>
     </div>
   );
 };

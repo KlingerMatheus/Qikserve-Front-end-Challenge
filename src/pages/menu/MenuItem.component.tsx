@@ -1,4 +1,5 @@
-import { Item } from "../../types";
+import { useSelector } from "react-redux";
+import { Item, RootState } from "../../types";
 import { formatPrice } from "../../utils";
 import { FunctionComponent, useMemo } from "react";
 
@@ -13,11 +14,14 @@ export const MenuItem: FunctionComponent<Props> = ({
   onClick,
   quantityAdded,
 }) => {
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
   const itemPrice = useMemo(() => {
     if (item.modifiers?.[0].items[0])
-      return formatPrice(item.modifiers?.[0].items[0].price ?? 0);
+      return formatPrice(item.modifiers?.[0].items[0].price ?? 0, currency);
 
-    return formatPrice(item.price);
+    return formatPrice(item.price, currency);
   }, [item]);
 
   return (

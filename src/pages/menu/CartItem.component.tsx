@@ -1,12 +1,17 @@
+import { useTranslation } from "react-i18next";
 import {
   cartRemoveItem,
   updateCartItemQuantity,
 } from "../../reducers/slices/cartSlice";
-import { CartItem as CartItemType, RemoveItemAction } from "../../types";
+import {
+  CartItem as CartItemType,
+  RemoveItemAction,
+  RootState,
+} from "../../types";
 import { findMatchingModifier, formatPrice } from "../../utils";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { FunctionComponent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
   item: CartItemType;
@@ -18,6 +23,10 @@ export const CartItem: FunctionComponent<Props> = ({ item }) => {
     item.selectedModifierId,
     item.modifiers
   );
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
+  const { t } = useTranslation("cart");
 
   function handleRemoveItem(props: RemoveItemAction) {
     dispatch(cartRemoveItem(props));
@@ -35,9 +44,9 @@ export const CartItem: FunctionComponent<Props> = ({ item }) => {
 
   function decrementQuantity() {
     if (item.quantity <= 1) {
-      if (confirm("Tem certeza que deseja excluir este item?")) {
+      if (confirm(t("dialogRemoveItem", { name: item.name }))) {
         handleRemoveItem({ id: item.id, modifierId: item.selectedModifierId });
-        alert("Item excluído!");
+        alert(t("itemRemoved", { name: item.name }));
         return;
       } else {
         return;
@@ -57,7 +66,9 @@ export const CartItem: FunctionComponent<Props> = ({ item }) => {
     <div className="cart-list-items-item">
       <div className="item-details">
         <span className="item-name">{item.name}</span>
-        <span className="item-price">{formatPrice(item.unitPrice)}</span>
+        <span className="item-price">
+          {formatPrice(item.unitPrice, currency)}
+        </span>
       </div>
       {modifierDetails && (
         <span className="cart-item-option-description">
