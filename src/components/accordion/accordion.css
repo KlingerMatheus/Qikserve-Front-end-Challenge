@@ -21,6 +21,10 @@ summary {
   padding-top: 32px;
   padding-bottom: 12px;
 
+  &::-webkit-details-marker {
+    display: none;
+  }
+
   span {
     display: flex;
     align-items: center;
