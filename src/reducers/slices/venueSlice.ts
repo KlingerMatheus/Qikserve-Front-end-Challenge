@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { VenueData, VenueState } from "types";
+import { VenueData, VenueState } from "../../types";
 
 const initialState: VenueState = {
   data: null,
