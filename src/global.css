@@ -10,7 +10,8 @@
   --dark-gray: #121212;
   --placeholder: #8a94a4;
 
-  --default-text: #5f5f5f;
+  --text-primary: #121212;
+  --text-secondary: #5f5f5f;
 
   --rounded-full: 9999px;
 }
@@ -25,6 +26,7 @@ body {
   padding: 0;
   margin: 0;
   background-color: var(--light-gray) !important;
+  color: var(--text-primary);
 }
 
 main {

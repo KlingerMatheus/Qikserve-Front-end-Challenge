@@ -26,7 +26,7 @@ button {
 
   &:disabled {
     background: #dadada;
-    color: var(--default-text);
+    color: var(--text-secondary);
     cursor: not-allowed;
   }
 }

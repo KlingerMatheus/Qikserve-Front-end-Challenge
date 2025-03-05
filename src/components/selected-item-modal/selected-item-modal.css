@@ -68,7 +68,6 @@
     font-size: 24px;
     line-height: 28.13px;
     letter-spacing: 0px;
-    color: var(--dark-gray);
     margin: 0;
   }
 
@@ -100,7 +99,7 @@
 
   .modifier-limit {
     font-weight: 400;
-    color: var(--default-text);
+    color: var(--text-secondary);
   }
 }
 
@@ -123,7 +122,6 @@
 
       .option-name {
         font-weight: 500;
-        color: var(--dark-gray);
       }
 
       .option-price {

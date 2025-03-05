@@ -59,7 +59,6 @@
         font-size: 16px;
         line-height: 18.75px;
         letter-spacing: 0px;
-        color: var(--dark-gray);
       }
 
       .item-price {
@@ -68,7 +67,6 @@
         line-height: 18.75px;
         letter-spacing: 0.5px;
         text-align: right;
-        color: var(--dark-gray);
       }
     }
   }
@@ -78,7 +76,7 @@
     font-size: 16px;
     line-height: 18.75px;
     letter-spacing: 0px;
-    color: var(--default-text);
+    color: var(--text-secondary);
   }
 
   .quantity-control-buttons {
@@ -93,7 +91,6 @@
       font-size: 16px;
       line-height: 18.75px;
       text-align: center;
-      color: var(--dark-gray);
     }
 
     button {
@@ -119,7 +116,6 @@
     justify-content: space-between;
     gap: 24px;
     padding-inline: 16px;
-    color: var(--dark-gray);
   }
 
   .total .label,
@@ -178,7 +174,7 @@
     font-size: 16px;
     line-height: 18.75px;
     letter-spacing: 0px;
-    color: var(--default-text);
+    color: var(--text-secondary);
   }
 
   .quantity-control-buttons {
@@ -193,7 +189,6 @@
       font-size: 16px;
       line-height: 18.75px;
       text-align: center;
-      color: var(--dark-gray);
     }
 
     button {
