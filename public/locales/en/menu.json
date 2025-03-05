@@ -1,0 +1,9 @@
+{
+  "itemType.burgers": "Burgers",
+  "itemType.drinks": "Drinks",
+  "itemType.desserts": "Desserts",
+
+  "viewAllergyInformation": "View allergy information",
+
+  "addToOrder": "Add to order • {{ price }}"
+}

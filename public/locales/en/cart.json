@@ -1,0 +1,13 @@
+{
+  "cart": "Basket",
+  "emptyCart": "Your basket is empty",
+  "total": "Total",
+  "subtotal": "Sub total",
+  "checkoutNow": "Checkout now",
+
+  "yourCart_one": "Your basket • {{ count }} item",
+  "yourCart_other": "Your basket • {{ count }} items",
+
+  "dialogRemoveItem": "Are you sure you want to remove this item?",
+  "itemRemoved": "Item removed: {{name}}"
+}

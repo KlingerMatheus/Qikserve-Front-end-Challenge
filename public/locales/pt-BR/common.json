@@ -1,0 +1,13 @@
+{
+  "nav.menu": "Menu",
+  "nav.login": "Entrar",
+  "nav.contact": "Contato",
+
+  "searchPlaceholder": "Busque por itens do menu",
+
+  "emptyList": "Nada disponível",
+
+  "goToMenu": "Voltar ao Menu",
+  "pageInMaintenance": "Esta página está em manutenção.",
+  "pageNotFound": "Essa página não foi encontrada."
+}

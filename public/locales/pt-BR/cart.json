@@ -1,0 +1,13 @@
+{
+  "cart": "Carrinho",
+  "emptyCart": "Seu carrinho está vazio",
+  "total": "Total",
+  "subtotal": "Sub total",
+  "checkoutNow": "Finalizar pedido",
+
+  "yourCart_one": "Seu carrinho • {{ count }} item",
+  "yourCart_other": "Seu carrinho • {{ count }} itens",
+
+  "dialogRemoveItem": "Tem certeza que deseja excluir este item?",
+  "itemRemoved": "Item excluído: {{name}}"
+}

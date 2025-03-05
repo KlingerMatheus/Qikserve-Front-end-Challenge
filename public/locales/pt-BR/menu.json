@@ -1,0 +1,9 @@
+{
+  "itemType.burgers": "Lanches",
+  "itemType.drinks": "Bebidas",
+  "itemType.desserts": "Sobremesas",
+
+  "viewAllergyInformation": "Ver informações sobre alergia",
+
+  "addToOrder": "Adicione ao pedido • {{ price }}"
+}
