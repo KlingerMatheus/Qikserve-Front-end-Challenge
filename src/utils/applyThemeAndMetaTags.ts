@@ -28,8 +28,6 @@ async function applyThemeAndMetaTags(
 
       bannerImageElement?.setAttribute("src", bannerImage);
 
-      console.log(bannerImageElement);
-
       document.documentElement.style.setProperty(
         "--background-color",
         backgroundColour
