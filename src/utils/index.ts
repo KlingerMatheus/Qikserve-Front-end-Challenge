@@ -1,5 +1,6 @@
 import { Modifier, ModifierItem } from "../types";
 import applyThemeAndMetaTags from "./applyThemeAndMetaTags";
+import translateItemDescription from "./translateItemDescription";
 
 function formatPrice(price: number, currency?: string) {
   const locale = localStorage.getItem("i18nextLng") ?? "en-US";
@@ -28,4 +29,9 @@ function findMatchingModifier(
   return undefined;
 }
 
-export { applyThemeAndMetaTags, findMatchingModifier, formatPrice };
+export {
+  applyThemeAndMetaTags,
+  findMatchingModifier,
+  formatPrice,
+  translateItemDescription,
+};
