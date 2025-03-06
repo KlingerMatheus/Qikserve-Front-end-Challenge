@@ -1,8 +1,11 @@
 import { Modifier, ModifierItem } from "../types";
 import applyThemeAndMetaTags from "./applyThemeAndMetaTags";
+import translateItemDescription from "./translateItemDescription";
 
-function formatPrice(price: number) {
-  return `R$${price.toLocaleString("pt-BR", {
+function formatPrice(price: number, currency?: string) {
+  const locale = localStorage.getItem("i18nextLng") ?? "en-US";
+
+  return `${currency ?? "$"}${price.toLocaleString(locale, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
@@ -26,4 +29,9 @@ function findMatchingModifier(
   return undefined;
 }
 
-export { applyThemeAndMetaTags, findMatchingModifier, formatPrice };
+export {
+  applyThemeAndMetaTags,
+  findMatchingModifier,
+  formatPrice,
+  translateItemDescription,
+};

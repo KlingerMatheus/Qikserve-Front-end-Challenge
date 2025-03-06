@@ -1,6 +1,8 @@
-import { Item } from "../../types";
-import { formatPrice } from "../../utils";
+import { useSelector } from "react-redux";
+import { Item, RootState } from "../../types";
+import { formatPrice, translateItemDescription } from "../../utils";
 import { FunctionComponent, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   item: Item;
@@ -13,11 +15,15 @@ export const MenuItem: FunctionComponent<Props> = ({
   onClick,
   quantityAdded,
 }) => {
+  const { t } = useTranslation(["menu", "common"]);
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
   const itemPrice = useMemo(() => {
     if (item.modifiers?.[0].items[0])
-      return formatPrice(item.modifiers?.[0].items[0].price ?? 0);
+      return formatPrice(item.modifiers?.[0].items[0].price ?? 0, currency);
 
-    return formatPrice(item.price);
+    return formatPrice(item.price, currency);
   }, [item]);
 
   return (
@@ -38,7 +44,9 @@ export const MenuItem: FunctionComponent<Props> = ({
             {item.name}
           </span>
           {item.description && (
-            <span className="item-description">{item.description}</span>
+            <span className="item-description">
+              {translateItemDescription(item.description, t)}
+            </span>
           )}
           <span className="item-price">{itemPrice}</span>
         </div>

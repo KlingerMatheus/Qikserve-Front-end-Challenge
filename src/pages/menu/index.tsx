@@ -23,19 +23,26 @@ import { Modal } from "../../components/selected-item-modal/SelectedItemModal";
 import { MenuItem } from "./MenuItem.component";
 import { MenuSectionItem } from "./MenuSectionItem.component";
 
+import { useTranslation } from "react-i18next";
+
 import "./menu.css";
 
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
   const dispatch = useDispatch();
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const { items: cartItems, totalPrice } = useSelector(
+    (state: RootState) => state.cart
+  );
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
 
   const [activeSectionId, setActiveSectionId] = useState<number | null>(null);
   const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const { t } = useTranslation(["cart", "common", "menu"]);
   const { isLaptopOrDesktop } = useBreakpoints();
 
   useEffect(() => {
@@ -62,7 +69,11 @@ const MenuPage = () => {
   };
 
   const renderAccordion = (section: Section) => (
-    <Accordion key={section.id} title={section.name} defaultOpen>
+    <Accordion
+      key={section.id}
+      title={t(`menu:itemType.${section.name.toLowerCase()}`)}
+      defaultOpen
+    >
       <div className="menu-list-items">
         {section.items.map((item: Item) => {
           if (
@@ -103,7 +114,10 @@ const MenuPage = () => {
     <>
       {isModalOpen && <Modal closeModal={handleCloseModal} />}
 
-      <SearchBar onSearch={setSearch} placeholder="Search menu items" />
+      <SearchBar
+        onSearch={setSearch}
+        placeholder={t("common:searchPlaceholder")}
+      />
 
       <div className="page-menu-container">
         <Page.Root
@@ -121,7 +135,7 @@ const MenuPage = () => {
                     key={section.id}
                   />
                 ))
-              : "Nothing available"}
+              : t("common:nothingAvailable")}
           </div>
           <div className="menu-list-sections">
             {menuDetails?.sections.map((section: Section) => {
@@ -135,7 +149,7 @@ const MenuPage = () => {
             })}
           </div>
           <div className="view-allergy-link">
-            <span>View allergy information</span>
+            <span>{t("menu:viewAllergyInformation")}</span>
           </div>
         </Page.Root>
         {isLaptopOrDesktop && (
@@ -146,9 +160,9 @@ const MenuPage = () => {
               height: "min-content",
             }}
           >
-            <Page.Header title="Carrinho" />
+            <Page.Header title={t("cart:cart")} />
             {!cartItems.length ? (
-              <div className="empty-cart">Seu carrinho está vazio</div>
+              <div className="empty-cart">{t("cart:emptyCart")}</div>
             ) : (
               <div className="cart-list-items">
                 {cartItems.map((item: CartItemType) => (
@@ -163,8 +177,10 @@ const MenuPage = () => {
             {cartItems.length > 0 && (
               <Page.Footer>
                 <div className="cart-total-price-container">
-                  <span className="label">Total:</span>{" "}
-                  <span className="price">{formatPrice(totalPrice)}</span>
+                  <span className="label">{t("cart:total")}</span>{" "}
+                  <span className="price">
+                    {formatPrice(totalPrice, currency)}
+                  </span>
                 </div>
               </Page.Footer>
             )}
@@ -175,7 +191,7 @@ const MenuPage = () => {
       {!isLaptopOrDesktop && cartItems.length > 0 && (
         <div className="basket-shortcut-container">
           <PrimaryButton
-            label={`Your basket • ${cartItems.length} items`}
+            label={t("cart:yourCart", { count: cartItems.length })}
             onClick={() => setIsCartMobileOpen(true)}
           />
         </div>

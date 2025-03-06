@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartRemoveAllItems } from "../../../reducers/slices/cartSlice";
 
 import "./cart-mobile.css";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isOpen?: boolean;
@@ -24,8 +25,12 @@ const CartMobileContainer: FunctionComponent<Props> = ({
   cartItems,
 }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation("cart");
 
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
 
   const { isMobileOrTablet } = useBreakpoints();
 
@@ -43,7 +48,7 @@ const CartMobileContainer: FunctionComponent<Props> = ({
           <div className="icon-container">
             <LeftArrowIcon style={{ visibility: "hidden" }} />
           </div>
-          <h1 className="label">Basket</h1>
+          <h1 className="label">{t("cart")}</h1>
 
           <div className="icon-container" onClick={closeCart}>
             <CloseIcon aria-label="Close Cart" />
@@ -59,17 +64,17 @@ const CartMobileContainer: FunctionComponent<Props> = ({
         </div>
         <div className="cart-mobile-values">
           <div className="subtotal">
-            <span className="label">Sub total</span>
-            <span className="price">{formatPrice(totalPrice)}</span>
+            <span className="label">{t("subtotal")}</span>
+            <span className="price">{formatPrice(totalPrice, currency)}</span>
           </div>
           <hr />
           <div className="total">
-            <span className="label">Total</span>
-            <span className="price">{formatPrice(totalPrice)}</span>
+            <span className="label">{t("total")}</span>
+            <span className="price">{formatPrice(totalPrice, currency)}</span>
           </div>
         </div>
         <div className="cart-mobile-checkout">
-          <PrimaryButton label="Checkout now" onClick={handleCheckout} />
+          <PrimaryButton label={t("checkoutNow")} onClick={handleCheckout} />
         </div>
       </div>
     )

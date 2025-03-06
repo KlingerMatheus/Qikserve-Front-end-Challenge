@@ -12,12 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { CloseIcon } from "../../assets/icons";
 import { RootState } from "../../types";
-import { formatPrice } from "../../utils";
+import { formatPrice, translateItemDescription } from "../../utils";
 import { useBreakpoints } from "../../hooks";
 import { cartAddNewItem } from "../../reducers/slices/cartSlice";
 import { PrimaryButton } from "../../components/primary-button/PrimaryButton";
 
 import "./selected-item-modal.css";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   closeModal: () => void;
@@ -42,6 +43,10 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
   );
   const { isMobileOrTablet } = useBreakpoints();
   const dispatch = useDispatch();
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
+  const { t } = useTranslation(["menu", "common"]);
 
   function handleAddItemToOrder() {
     if (!selectedItem) return;
@@ -85,7 +90,9 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
           )}
           <div className="modal-info">
             <h2>{selectedItem?.name}</h2>
-            <p>{selectedItem?.description}</p>
+            <p>
+              {translateItemDescription(selectedItem?.description ?? "", t)}
+            </p>
           </div>
         </div>
         {selectedItem?.modifiers?.map((modifier) => (
@@ -105,7 +112,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
                         <div className="modifier-options-option">
                           <span className="option-name">{item.name}</span>
                           <span className="option-price">
-                            {formatPrice(item.price)}
+                            {formatPrice(item.price, currency)}
                           </span>
                         </div>
                         <input
@@ -146,7 +153,9 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
             <PrimaryButton
               disabled={totalPrice <= 0}
               onClick={handleAddItemToOrder}
-              label={`Add to order • ${formatPrice(totalPrice)}`}
+              label={t("addToOrder", {
+                price: formatPrice(totalPrice, currency),
+              })}
             />
           </div>
         )}
