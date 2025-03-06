@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { NAVBAR_ITEMS } from "./constants";
@@ -13,6 +13,15 @@ export const Navbar: FC = () => {
   const { isMobileOrTablet } = useBreakpoints();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation("common");
+
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (!e) return;
+    i18n.changeLanguage(e.target.value);
+  };
+
+  const currentLanguage = i18n.language;
 
   return (
     <>
@@ -42,11 +51,18 @@ export const Navbar: FC = () => {
                 </li>
               );
             })}
+            <div className="language-select">
+              <select onChange={changeLanguage} defaultValue={currentLanguage}>
+                <option value="en">English</option>
+                <option value="pt-BR">Português</option>
+              </select>
+            </div>
           </ul>
         )}
       </nav>
 
       {isMenuOpen &&
+        isMobileOrTablet &&
         createPortal(
           <nav className="mobile-navbar">
             <button
@@ -61,11 +77,17 @@ export const Navbar: FC = () => {
 
                 return (
                   <li key={item.name} className="item">
-                    <a href={item.path}>{item.name}</a>
+                    <a href={item.path}>{t(`common:nav.${item.name}`)}</a>
                     {isActive && <span />}
                   </li>
                 );
               })}
+            </div>
+            <div className="language-select">
+              <select onChange={changeLanguage} defaultValue={currentLanguage}>
+                <option value="en">English</option>
+                <option value="pt-BR">Português</option>
+              </select>
             </div>
           </nav>,
           document.body

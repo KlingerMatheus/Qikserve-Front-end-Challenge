@@ -37,6 +37,7 @@ const CartMobileContainer: FunctionComponent<Props> = ({
   function handleCheckout() {
     dispatch(cartRemoveAllItems());
     closeCart();
+    alert("Simulating checkout... Successful");
   }
 
   return (
