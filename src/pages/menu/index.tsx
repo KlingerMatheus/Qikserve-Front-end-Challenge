@@ -30,7 +30,12 @@ import "./menu.css";
 const MenuPage = () => {
   const { isMenuLoading, menuDetails } = useMenuDetails();
   const dispatch = useDispatch();
-  const { cart, venue } = useSelector((state: RootState) => state);
+  const { items: cartItems, totalPrice } = useSelector(
+    (state: RootState) => state.cart
+  );
+  const currency = useSelector(
+    (state: RootState) => state.venue.data?.ccySymbol
+  );
 
   const [activeSectionId, setActiveSectionId] = useState<number | null>(null);
   const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
@@ -78,7 +83,7 @@ const MenuPage = () => {
             return;
           }
 
-          const cartItem = cart.items.filter(
+          const cartItem = cartItems.filter(
             (cartItem: CartItemType) => cartItem.id === item.id
           );
           const cartItemQuantity =
@@ -156,11 +161,11 @@ const MenuPage = () => {
             }}
           >
             <Page.Header title={t("cart:cart")} />
-            {!cart.items.length ? (
+            {!cartItems.length ? (
               <div className="empty-cart">{t("cart:emptyCart")}</div>
             ) : (
               <div className="cart-list-items">
-                {cart.items.map((item: CartItemType) => (
+                {cartItems.map((item: CartItemType) => (
                   <CartItem
                     key={`${item.id}-${item.selectedModifierId}`}
                     item={item}
@@ -169,12 +174,12 @@ const MenuPage = () => {
               </div>
             )}
 
-            {cart.items.length > 0 && (
+            {cartItems.length > 0 && (
               <Page.Footer>
                 <div className="cart-total-price-container">
                   <span className="label">{t("cart:total")}</span>{" "}
                   <span className="price">
-                    {formatPrice(cart.totalPrice, venue.data?.ccySymbol)}
+                    {formatPrice(totalPrice, currency)}
                   </span>
                 </div>
               </Page.Footer>
@@ -183,10 +188,10 @@ const MenuPage = () => {
         )}
       </div>
 
-      {!isLaptopOrDesktop && cart.items.length > 0 && (
+      {!isLaptopOrDesktop && cartItems.length > 0 && (
         <div className="basket-shortcut-container">
           <PrimaryButton
-            label={t("cart:yourCart", { count: cart.items.length })}
+            label={t("cart:yourCart", { count: cartItems.length })}
             onClick={() => setIsCartMobileOpen(true)}
           />
         </div>
@@ -195,7 +200,7 @@ const MenuPage = () => {
       <CartMobile
         isOpen={isCartMobileOpen}
         closeCart={() => setIsCartMobileOpen(false)}
-        cartItems={cart.items}
+        cartItems={cartItems}
       />
     </>
   );

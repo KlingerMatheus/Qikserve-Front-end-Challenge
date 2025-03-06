@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { CloseIcon } from "../../assets/icons";
 import { RootState } from "../../types";
-import { formatPrice } from "../../utils";
+import { formatPrice, translateItemDescription } from "../../utils";
 import { useBreakpoints } from "../../hooks";
 import { cartAddNewItem } from "../../reducers/slices/cartSlice";
 import { PrimaryButton } from "../../components/primary-button/PrimaryButton";
@@ -46,7 +46,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
   const currency = useSelector(
     (state: RootState) => state.venue.data?.ccySymbol
   );
-  const { t } = useTranslation("menu");
+  const { t } = useTranslation(["menu", "common"]);
 
   function handleAddItemToOrder() {
     if (!selectedItem) return;
@@ -90,7 +90,9 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
           )}
           <div className="modal-info">
             <h2>{selectedItem?.name}</h2>
-            <p>{selectedItem?.description}</p>
+            <p>
+              {translateItemDescription(selectedItem?.description ?? "", t)}
+            </p>
           </div>
         </div>
         {selectedItem?.modifiers?.map((modifier) => (
