@@ -5,5 +5,26 @@
 
   "viewAllergyInformation": "View allergy information",
 
-  "addToOrder": "Add to order • {{ price }}"
+  "addToOrder": "Add to order • {{ price }}",
+
+  "ingredients": {
+    "pressedHamburger": "pressed hamburger",
+    "mozzarellaCheese": "mozzarella cheese",
+    "pickles": "pickles",
+    "redOnion": "red onion",
+    "grilledBacon": "grilled bacon",
+    "traditionalHeinzMayonnaise": "traditional Heinz mayonnaise",
+    "angusBeefBurger": "angus beef burger",
+    "withShreddedRibs": "with shredded ribs",
+    "gruyereCheese": "gruyere cheese",
+    "caramelizedOnions": "caramelized onions",
+    "lettuce": "lettuce",
+    "confitTomato": "confit tomato",
+    "specialHouseBread": "special house bread",
+    "servedWithFriedCassava": "served with fried cassava",
+    "passionFruitChipotle": "passion fruit chipotle",
+    "homemadeMolassesBarbecueWithGoldenBaconCubes": "homemade molasses barbecue with golden bacon cubes",
+    "goldenBaconCubes": "golden bacon cubes",
+    "homemadeRoastedGarlicMayonnaise": "homemade roasted garlic mayonnaise"
+  }
 }

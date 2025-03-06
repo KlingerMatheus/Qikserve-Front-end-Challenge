@@ -9,5 +9,7 @@
 
   "goToMenu": "Go to Menu",
   "pageInMaintenance": "This page is currently is maintenance",
-  "pageNotFound": "This page was not found."
+  "pageNotFound": "This page was not found.",
+
+  "and": "and"
 }

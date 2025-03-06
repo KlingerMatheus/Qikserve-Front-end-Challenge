@@ -5,5 +5,26 @@
 
   "viewAllergyInformation": "Ver informações sobre alergia",
 
-  "addToOrder": "Adicione ao pedido • {{ price }}"
+  "addToOrder": "Adicione ao pedido • {{ price }}",
+
+  "ingredients": {
+    "pressedHamburger": "hambúrguer prensado",
+    "mozzarellaCheese": "queijo mussarela",
+    "pickles": "picles",
+    "redOnion": "cebola roxa",
+    "grilledBacon": "bacon grelhado",
+    "traditionalHeinzMayonnaise": "maionese Heinz tradicional",
+    "angusBeefBurger": "hambúrguer de carne angus",
+    "withShreddedRibs": "com costelas desfiadas",
+    "gruyereCheese": "queijo gruyère",
+    "caramelizedOnions": "cebolas caramelizadas",
+    "lettuce": "alface",
+    "confitTomato": "tomate confitado",
+    "specialHouseBread": "pão especial da casa",
+    "servedWithFriedCassava": "servido com mandioca frita",
+    "passionFruitChipotle": "chipotle de maracujá",
+    "homemadeMolassesBarbecueWithGoldenBaconCubes": "barbecue caseiro de melaço com cubos de bacon dourado",
+    "goldenBaconCubes": "cubos de bacon dourado",
+    "homemadeRoastedGarlicMayonnaise": "maionese de alho assado caseira"
+  }
 }
