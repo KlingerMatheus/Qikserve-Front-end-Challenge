@@ -57,7 +57,7 @@ For deployment, I used Vercel, which I'm familiar with, to expedite the process 
 
 So, the Figma design had some issues that affected what I could do. Stuff like the 'Subtotal' value was kinda vague, and the order process wasn't fully there – the checkout just acted like it worked, no real payment stuff. Plus, I couldn't do the 'Contact' and 'Login' pages because they weren't in the design.
 
-Oh, and I figured the search bar would work for each section, not for the whole thing, that's why it was implemented like that, no details were provided.
+Oh, and I figured the search bar would work for each section, not for the whole thing, that's why it was implemented like that, no details were provided. Also, the "View allergy information" has not an action, I would implement a modal for it to show information about it.
 
 ## Final thoughts
 
