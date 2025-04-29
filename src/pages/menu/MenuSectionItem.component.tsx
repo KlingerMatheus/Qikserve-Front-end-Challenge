@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Section } from "../../types";
 import { FunctionComponent } from "react";
+import LazyImage from "../../components/lazy-image/LazyImage";
 
 interface Props {
   section: Section;
@@ -23,7 +24,7 @@ export const MenuSectionItem: FunctionComponent<Props> = ({
       onClick={onClick}
       data-isactive={section.id === activeSectionId ? true : null}
     >
-      <img src={section.images?.[0].image} alt={tSectionName} />
+      <LazyImage src={section.images?.[0].image ?? ""} />
       <span>{tSectionName}</span>
     </div>
   );

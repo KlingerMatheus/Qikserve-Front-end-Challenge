@@ -19,6 +19,7 @@ import { PrimaryButton } from "../../components/primary-button/PrimaryButton";
 
 import "./selected-item-modal.css";
 import { useTranslation } from "react-i18next";
+import LazyImage from "../../components/lazy-image/LazyImage";
 
 interface Props {
   closeModal: () => void;
@@ -83,10 +84,7 @@ const AddOrderModalComponent: FunctionComponent<PropsWithChildren<Props>> = ({
         </div>
         <div>
           {selectedItem?.images && (
-            <img
-              src={selectedItem?.images?.[0].image}
-              alt={selectedItem?.name}
-            />
+            <LazyImage src={selectedItem?.images?.[0].image} />
           )}
           <div className="modal-info">
             <h2>{selectedItem?.name}</h2>

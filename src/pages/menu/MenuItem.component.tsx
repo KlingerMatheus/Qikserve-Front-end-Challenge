@@ -3,6 +3,7 @@ import { Item, RootState } from "../../types";
 import { formatPrice, translateItemDescription } from "../../utils";
 import { FunctionComponent, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import LazyImage from "../../components/lazy-image/LazyImage";
 
 interface Props {
   item: Item;
@@ -50,9 +51,7 @@ export const MenuItem: FunctionComponent<Props> = ({
           )}
           <span className="item-price">{itemPrice}</span>
         </div>
-        {item.images && (
-          <img src={item.images?.[0].image} alt={item.name} loading="lazy" />
-        )}
+        {item.images && <LazyImage src={item.images?.[0].image} />}
       </div>
     </div>
   );
